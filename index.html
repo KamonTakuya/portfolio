@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>掃部託矢 ポートフォリオ｜Web制作・ライティング</title>
+<meta name="description" content="LP制作、コーポレートサイト制作、記事執筆のポートフォリオ。AIを活用した制作でコストと速度を両立します。">
+<style>
+:root{
+  --ink:#1c2430;--ink-soft:#5f6b7a;--line:#e3e8ee;
+  --bg:#ffffff;--wash:#f6f8fa;--accent:#2563a8;--accent-deep:#1b4a7d;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.9;font-size:15px;
+  letter-spacing:.02em;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.container{max-width:920px;margin:0 auto;padding:0 24px;}
+
+.hero{
+  background:linear-gradient(155deg,#152a42,#1e4a72 60%,#256a94);
+  color:#fff;padding:76px 0 68px;
+}
+.hero-label{
+  display:inline-block;font-size:11px;letter-spacing:.22em;font-weight:700;
+  color:#8fc7ea;border:1px solid rgba(143,199,234,.4);
+  padding:5px 14px;border-radius:100px;margin-bottom:24px;
+}
+.hero h1{font-size:34px;line-height:1.5;font-weight:700;margin-bottom:16px;}
+.hero p{font-size:15px;color:rgba(255,255,255,.82);max-width:620px;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px;}
+.hero-tags span{
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);
+  font-size:12.5px;padding:6px 14px;border-radius:100px;
+}
+
+section{padding:72px 0;}
+.sec-label{font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--accent);margin-bottom:10px;}
+h2{font-size:26px;font-weight:700;margin-bottom:12px;line-height:1.5;}
+.sec-lead{color:var(--ink-soft);font-size:14.5px;margin-bottom:40px;max-width:640px;}
+
+.works{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.work{
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  text-decoration:none;display:block;transition:box-shadow .2s,transform .2s;
+  background:#fff;
+}
+.work:hover{box-shadow:0 12px 32px rgba(28,36,48,.1);transform:translateY(-3px);}
+.work-thumb{height:180px;position:relative;}
+.thumb-salon{
+  background:
+    radial-gradient(circle at 28% 34%, rgba(255,255,255,.5), transparent 45%),
+    linear-gradient(140deg,#e8dccb,#c9a684);
+}
+.thumb-corp{
+  background:
+    radial-gradient(circle at 72% 30%, rgba(126,200,214,.5), transparent 55%),
+    linear-gradient(145deg,#0f2a3d,#1d5570);
+}
+.thumb-article{
+  background:
+    radial-gradient(circle at 30% 70%, rgba(255,255,255,.45), transparent 50%),
+    linear-gradient(140deg,#e6ecf2,#b9c7d6);
+}
+.work-thumb span{
+  position:absolute;left:16px;bottom:14px;
+  background:rgba(255,255,255,.92);color:var(--ink);
+  font-size:11px;font-weight:700;letter-spacing:.1em;
+  padding:5px 12px;border-radius:100px;
+}
+.work-body{padding:22px;}
+.work-body h3{font-size:17.5px;margin-bottom:8px;line-height:1.55;}
+.work-body p{font-size:13.5px;color:var(--ink-soft);margin-bottom:14px;}
+.work-meta{display:flex;gap:6px;flex-wrap:wrap;}
+.work-meta em{
+  font-style:normal;font-size:11.5px;background:var(--wash);
+  border:1px solid var(--line);color:var(--ink-soft);
+  padding:4px 10px;border-radius:4px;
+}
+.work-link{
+  margin-top:16px;font-size:13.5px;font-weight:700;color:var(--accent);
+  display:inline-flex;align-items:center;gap:5px;
+}
+
+.skills{background:var(--wash);}
+.skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.skill{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 22px;}
+.skill h3{font-size:16px;margin-bottom:10px;}
+.skill p{font-size:13.5px;color:var(--ink-soft);}
+
+.about-list{list-style:none;}
+.about-list li{padding:16px 0;border-bottom:1px solid var(--line);display:flex;gap:20px;font-size:14px;}
+.about-list b{flex:none;width:110px;color:var(--ink-soft);font-size:13px;}
+
+.contact{background:linear-gradient(150deg,#152a42,#1e4a72);color:#fff;text-align:center;}
+.contact h2{color:#fff;}
+.contact p{color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 8px;font-size:14.5px;}
+
+footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12.5px;text-align:center;}
+
+.note{
+  background:#fff8e6;border:1px solid #f0e0b8;color:#8a6d2f;
+  font-size:12.5px;padding:14px 18px;border-radius:8px;margin-top:32px;line-height:1.8;
+}
+
+@media(max-width:760px){
+  .works{grid-template-columns:1fr;}
+  .skill-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:26px;}
+  .hero{padding:56px 0 50px;}
+  section{padding:54px 0;}
+  h2{font-size:22px;}
+  .about-list li{flex-direction:column;gap:2px;}
+  .about-list b{width:auto;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <span class="hero-label">PORTFOLIO</span>
+    <h1>掃部 託矢<br>Web制作・ライティング</h1>
+    <p>フリーランス（個人事業主）として、LP・コーポレートサイトの制作と記事執筆を行っています。生成AIを土台づくりに活用し、細部は人の目で仕上げることで、コストと速度を両立させる進め方を得意としています。</p>
+    <div class="hero-tags">
+      <span>LP制作</span>
+      <span>コーポレートサイト</span>
+      <span>HTML / CSS</span>
+      <span>レスポンシブ対応</span>
+      <span>WordPress</span>
+      <span>記事執筆</span>
+      <span>AI活用</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <p class="sec-label">WORKS</p>
+    <h2>制作物</h2>
+    <p class="sec-lead">いずれも架空の企業・店舗を想定して制作したサンプルです。実在の企業・店舗ではありません。</p>
+
+    <div class="works">
+
+      <a href="01-salon-lp/" class="work">
+        <div class="work-thumb thumb-salon"><span>LANDING PAGE</span></div>
+        <div class="work-body">
+          <h3>整体サロンの集客用LP</h3>
+          <p>スマートフォン最適化の1ページ完結型。悩みの提示から予約導線まで、離脱させない構成を意識しました。固定フッターCTA、FAQアコーディオンを実装。</p>
+          <div class="work-meta">
+            <em>HTML / CSS</em><em>スマホ最適化</em><em>CV導線設計</em>
+          </div>
+          <p class="work-link">サイトを見る →</p>
+        </div>
+      </a>
+
+      <a href="02-corporate-site/" class="work">
+        <div class="work-thumb thumb-corp"><span>CORPORATE SITE</span></div>
+        <div class="work-body">
+          <h3>技術系企業のコーポレートサイト</h3>
+          <p>専門性と信頼感が伝わる構成を重視。事業内容・強み・依頼の流れ・会社概要までを1ページに整理し、PC／スマホ両対応で制作しました。</p>
+          <div class="work-meta">
+            <em>HTML / CSS</em><em>レスポンシブ</em><em>情報設計</em>
+          </div>
+          <p class="work-link">サイトを見る →</p>
+        </div>
+      </a>
+
+      <a href="03-articles/01_%E4%BB%95%E4%BA%8B%E3%81%AE%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D%E3%81%AE%E3%81%A4%E3%81%91%E6%96%B9.md" class="work">
+        <div class="work-thumb thumb-article"><span>WRITING</span></div>
+        <div class="work-body">
+          <h3>ビジネス記事「仕事の優先順位のつけ方」</h3>
+          <p>社会人向けメディアを想定した約2,000字の記事。読者の状況描写から入り、実務で使える判断基準を4つに整理しました。</p>
+          <div class="work-meta">
+            <em>約2,000字</em><em>ビジネス</em><em>構成設計</em>
+          </div>
+          <p class="work-link">記事を読む →</p>
+        </div>
+      </a>
+
+      <a href="03-articles/02_%E7%A4%BE%E4%BC%9A%E4%BA%BA1%E5%B9%B4%E7%9B%AE%E3%81%AB%E3%82%84%E3%81%A3%E3%81%A6%E8%89%AF%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8.md" class="work">
+        <div class="work-thumb thumb-article"><span>WRITING</span></div>
+        <div class="work-body">
+          <h3>体験談記事「社会人1年目にやって良かったこと」</h3>
+          <p>実際にクラウドワークスの案件として納品し、クライアントの検収が完了した記事です。指定構成（タイトル＋導入文＋本文＋まとめ）に沿って執筆。</p>
+          <div class="work-meta">
+            <em>約500字</em><em>納品実績</em><em>体験談</em>
+          </div>
+          <p class="work-link">記事を読む →</p>
+        </div>
+      </a>
+
+    </div>
+
+    <p class="note">
+      ※ サンプル作品は、実在の企業・店舗を装うことのないよう、各ページ上部に架空である旨を明記しています。<br>
+      ※ 実案件の納品物については、クライアント様の許可を得たもののみ掲載しております。
+    </p>
+  </div>
+</section>
+
+<section class="skills">
+  <div class="container">
+    <p class="sec-label">SKILLS</p>
+    <h2>対応できること</h2>
+    <p class="sec-lead">制作から公開、その後の更新までを一貫してお引き受けします。</p>
+
+    <div class="skill-grid">
+      <div class="skill">
+        <h3>Web制作</h3>
+        <p>LP・コーポレートサイトの企画構成、デザイン、HTML/CSSコーディング、レスポンシブ対応、公開設定まで。WordPress・Shopifyでの構築にも対応します。</p>
+      </div>
+      <div class="skill">
+        <h3>ライティング</h3>
+        <p>ビジネス・キャリア・暮らし分野の記事執筆。構成設計から執筆、推敲まで。読者が何を知りたいかを起点に組み立てます。</p>
+      </div>
+      <div class="skill">
+        <h3>AI活用・業務自動化</h3>
+        <p>生成AIを2〜3年使用。記事の量産や同一構造ページの展開など、繰り返し作業を仕組み化して品質を揃えたまま速度を出します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="sec-label">ABOUT</p>
+    <h2>プロフィール</h2>
+    <ul class="about-list">
+      <li><b>氏名</b><span>掃部 託矢（かもん たくや）</span></li>
+      <li><b>形態</b><span>フリーランス／個人事業主</span></li>
+      <li><b>拠点</b><span>大阪府（フルリモート対応）</span></li>
+      <li><b>業務内容</b><span>Web制作、記事制作、AI活用による業務自動化、ソフトウェア・アプリ開発</span></li>
+      <li><b>使用ツール</b><span>VS Code / Git / Figma / Canva / WordPress / 生成AI各種</span></li>
+      <li><b>心がけていること</b><span>連絡は早く、修正は丁寧に。分からないことは分からないとお伝えします。</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="container">
+    <p class="sec-label" style="color:#8fc7ea;">CONTACT</p>
+    <h2>お仕事のご相談</h2>
+    <p>ランサーズ・クラウドワークスを通じてご連絡ください。<br>ご要望をお聞かせいただければ、進め方とお見積りをご提案いたします。</p>
+  </div>
+</section>
+
+<footer>
+  © 2026 掃部託矢 — Portfolio
+</footer>
+
+</body>
+</html>
