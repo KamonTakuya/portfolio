@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肩こり・腰痛専門 整体サロン ことのは｜大阪・本町</title>
+<meta name="description" content="大阪本町の肩こり・腰痛専門整体サロン。国家資格保有者による完全予約制のマンツーマン施術。初回60分3,980円。">
+<style>
+:root{
+  --ink:#2b2723;
+  --ink-soft:#6b635c;
+  --line:#e8e2da;
+  --bg:#fdfbf8;
+  --card:#ffffff;
+  --accent:#8c6b4f;
+  --accent-deep:#6b4f38;
+  --cta:#c9724a;
+  --cta-deep:#ad5c37;
+  --wash:#f4ede4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.9;
+  font-size:15px;
+  -webkit-font-smoothing:antialiased;
+  letter-spacing:.02em;
+  padding-bottom:72px;
+}
+img{max-width:100%;display:block;}
+.wrap{max-width:600px;margin:0 auto;background:var(--bg);}
+section{padding:56px 22px;}
+.eyebrow{
+  font-size:11px;letter-spacing:.22em;color:var(--accent);
+  font-weight:700;text-align:center;margin-bottom:10px;
+}
+h2{
+  font-size:22px;line-height:1.5;text-align:center;
+  font-weight:700;margin-bottom:8px;letter-spacing:.01em;
+}
+.h2-sub{text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:32px;}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;padding:0;
+  background:linear-gradient(160deg,#efe5d8 0%,#e3d3c0 55%,#d8c4ac 100%);
+  overflow:hidden;
+}
+.hero-inner{padding:44px 22px 40px;position:relative;z-index:2;}
+.hero-badge{
+  display:inline-block;background:rgba(255,255,255,.85);
+  color:var(--accent-deep);font-size:11px;font-weight:700;
+  letter-spacing:.12em;padding:6px 14px;border-radius:100px;margin-bottom:18px;
+}
+.hero h1{
+  font-size:27px;line-height:1.55;font-weight:700;
+  margin-bottom:16px;letter-spacing:.01em;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(transparent 62%, rgba(201,114,74,.28) 62%);
+  padding:0 2px;
+}
+.hero p{font-size:14px;color:#4d443c;margin-bottom:26px;}
+.hero-figure{
+  height:210px;
+  background:
+    radial-gradient(circle at 26% 34%, rgba(255,255,255,.55), transparent 42%),
+    radial-gradient(circle at 74% 68%, rgba(140,107,79,.22), transparent 46%),
+    linear-gradient(140deg,#e8dccb,#cdb69c);
+  position:relative;
+}
+.hero-figure::after{
+  content:"施術イメージ";
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:rgba(90,70,52,.42);font-size:12px;letter-spacing:.2em;
+}
+.hero-points{
+  display:flex;gap:8px;margin-bottom:24px;
+}
+.hero-points li{
+  flex:1;list-style:none;background:rgba(255,255,255,.72);
+  border-radius:10px;padding:10px 6px;text-align:center;
+  font-size:11.5px;font-weight:700;color:var(--accent-deep);line-height:1.5;
+}
+
+/* ---------- CTA ---------- */
+.btn{
+  display:block;text-align:center;text-decoration:none;
+  background:linear-gradient(180deg,var(--cta),var(--cta-deep));
+  color:#fff;font-weight:700;font-size:16px;
+  padding:17px 20px;border-radius:100px;
+  box-shadow:0 6px 18px rgba(173,92,55,.32);
+  letter-spacing:.04em;
+}
+.btn small{display:block;font-size:11px;font-weight:500;opacity:.9;margin-top:3px;letter-spacing:.06em;}
+.btn-line{
+  background:linear-gradient(180deg,#3bbd54,#2c9a41);
+  box-shadow:0 6px 18px rgba(44,154,65,.3);
+}
+.cta-note{text-align:center;font-size:11.5px;color:var(--ink-soft);margin-top:12px;}
+
+/* ---------- 悩み ---------- */
+.worry{background:var(--wash);}
+.worry-list{margin:0 auto;max-width:420px;}
+.worry-list li{
+  list-style:none;background:#fff;border-radius:12px;
+  padding:14px 16px 14px 44px;margin-bottom:10px;position:relative;
+  font-size:14px;box-shadow:0 1px 3px rgba(43,39,35,.05);
+}
+.worry-list li::before{
+  content:"✓";position:absolute;left:16px;top:14px;
+  color:var(--cta);font-weight:700;
+}
+.worry-close{
+  text-align:center;margin-top:26px;font-size:15px;font-weight:700;line-height:1.8;
+}
+.worry-close span{color:var(--accent-deep);}
+
+/* ---------- 選ばれる理由 ---------- */
+.reason-item{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:22px 20px;margin-bottom:14px;
+}
+.reason-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  font-size:13px;font-weight:700;margin-bottom:12px;
+}
+.reason-item h3{font-size:16.5px;margin-bottom:8px;line-height:1.6;}
+.reason-item p{font-size:13.5px;color:var(--ink-soft);}
+
+/* ---------- 流れ ---------- */
+.flow{background:var(--wash);}
+.flow-step{
+  display:flex;gap:14px;padding-bottom:22px;position:relative;
+}
+.flow-step:not(:last-child)::before{
+  content:"";position:absolute;left:15px;top:34px;bottom:0;
+  width:2px;background:#ddd0bd;
+}
+.flow-num{
+  flex:none;width:32px;height:32px;border-radius:50%;
+  background:#fff;border:2px solid var(--accent);
+  color:var(--accent-deep);font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;position:relative;z-index:1;
+}
+.flow-body h3{font-size:15.5px;margin-bottom:4px;}
+.flow-body p{font-size:13px;color:var(--ink-soft);}
+
+/* ---------- 料金 ---------- */
+.price-card{
+  background:var(--card);border:2px solid var(--accent);
+  border-radius:16px;padding:26px 22px;text-align:center;position:relative;
+  margin-bottom:16px;
+}
+.price-tag{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--cta);color:#fff;font-size:11.5px;font-weight:700;
+  padding:5px 16px;border-radius:100px;white-space:nowrap;
+  letter-spacing:.08em;
+}
+.price-name{font-size:15px;font-weight:700;margin-bottom:6px;}
+.price-old{font-size:13px;color:#a89c90;text-decoration:line-through;}
+.price-now{
+  font-size:38px;font-weight:700;color:var(--cta-deep);
+  line-height:1.2;letter-spacing:-.01em;
+}
+.price-now small{font-size:15px;font-weight:700;}
+.price-meta{font-size:12.5px;color:var(--ink-soft);margin-top:8px;}
+.price-sub{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;display:flex;justify-content:space-between;align-items:center;
+  font-size:14px;
+}
+.price-sub strong{font-size:17px;color:var(--accent-deep);}
+
+/* ---------- 声 ---------- */
+.voice{background:var(--wash);}
+.voice-card{
+  background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;
+  box-shadow:0 1px 3px rgba(43,39,35,.05);
+}
+.voice-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.voice-avatar{
+  width:38px;height:38px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,#e3d3c0,#c9b096);
+}
+.voice-name{font-size:13px;font-weight:700;}
+.voice-stars{color:#e0a33f;font-size:12px;letter-spacing:.1em;}
+.voice-card p{font-size:13.5px;color:#4d443c;}
+
+/* ---------- FAQ ---------- */
+details{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:12px;margin-bottom:10px;overflow:hidden;
+}
+summary{
+  padding:16px 44px 16px 18px;font-size:14.5px;font-weight:700;
+  cursor:pointer;position:relative;list-style:none;
+}
+summary::-webkit-details-marker{display:none;}
+summary::after{
+  content:"+";position:absolute;right:18px;top:14px;
+  font-size:20px;color:var(--accent);font-weight:400;transition:transform .2s;
+}
+details[open] summary::after{content:"−";}
+details p{padding:0 18px 16px;font-size:13.5px;color:var(--ink-soft);}
+
+/* ---------- 店舗情報 ---------- */
+.info-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+.info-table th,.info-table td{
+  padding:13px 4px;border-bottom:1px solid var(--line);
+  text-align:left;vertical-align:top;
+}
+.info-table th{width:88px;color:var(--ink-soft);font-weight:700;}
+.map-placeholder{
+  height:150px;background:#e9e3da;border-radius:12px;margin-top:18px;
+  display:flex;align-items:center;justify-content:center;
+  color:#9a8f84;font-size:12px;letter-spacing:.14em;
+}
+
+/* ---------- 最終CTA ---------- */
+.final{
+  background:linear-gradient(165deg,#8c6b4f,#5f4630);
+  color:#fff;text-align:center;
+}
+.final h2{color:#fff;}
+.final .h2-sub{color:rgba(255,255,255,.78);}
+.final .eyebrow{color:#e5cdb4;}
+.final .cta-note{color:rgba(255,255,255,.72);}
+.final .btn{margin-bottom:12px;}
+
+/* ---------- 固定フッターCTA ---------- */
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(255,255,255,.96);
+  border-top:1px solid var(--line);
+  padding:10px 14px;
+  display:flex;gap:8px;max-width:600px;margin:0 auto;
+  backdrop-filter:blur(8px);
+}
+.sticky a{
+  flex:1;text-align:center;text-decoration:none;border-radius:100px;
+  padding:13px 6px;font-size:13.5px;font-weight:700;letter-spacing:.02em;
+}
+.sticky .s-tel{background:#fff;border:1.5px solid var(--accent);color:var(--accent-deep);}
+.sticky .s-web{background:linear-gradient(180deg,var(--cta),var(--cta-deep));color:#fff;}
+
+footer{
+  text-align:center;padding:28px 22px 34px;
+  font-size:11.5px;color:#a09488;background:var(--wash);
+}
+.demo-note{
+  background:#fff8e6;border-top:1px solid #f0e0b8;border-bottom:1px solid #f0e0b8;
+  color:#8a6d2f;font-size:11.5px;padding:11px 22px;text-align:center;line-height:1.7;
+}
+@media(min-width:601px){
+  .wrap{box-shadow:0 0 40px rgba(43,39,35,.07);}
+  body{background:#efe9e1;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="demo-note">
+    ※ これはポートフォリオ用に制作した<strong>架空のサロン</strong>のサンプルページです。実在の店舗ではありません。
+  </p>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-badge">大阪・本町／完全予約制</span>
+      <h1>その肩こり、<br><em>「もみ返し」なしで</em><br>軽くなります。</h1>
+      <p>国家資格をもつ施術者が、あなたの体だけを見る60分。<br>強く揉まないから、翌日がラクです。</p>
+      <ul class="hero-points">
+        <li>国家資格<br>保有者のみ</li>
+        <li>完全<br>マンツーマン</li>
+        <li>初回<br>3,980円</li>
+      </ul>
+      <a href="#reserve" class="btn">
+        初回60分 3,980円で予約する
+        <small>24時間WEB受付・当日予約OK</small>
+      </a>
+      <p class="cta-note">今月の初回枠は残りわずかです</p>
+    </div>
+    <div class="hero-figure"></div>
+  </header>
+
+  <!-- 悩み -->
+  <section class="worry">
+    <p class="eyebrow">CHECK</p>
+    <h2>こんなお悩み、<br>ありませんか？</h2>
+    <p class="h2-sub">ひとつでも当てはまる方はご相談ください</p>
+    <ul class="worry-list">
+      <li>デスクワークで夕方には肩が石のように固まる</li>
+      <li>マッサージに行っても、数日で元に戻ってしまう</li>
+      <li>強く揉まれた翌日に、だるさや痛みが出る</li>
+      <li>腰が痛くて、朝起き上がるのがつらい</li>
+      <li>整形外科では「異常なし」と言われたが、つらい</li>
+    </ul>
+    <p class="worry-close">
+      その不調、<span>筋肉ではなく「関節の位置」</span>が<br>原因かもしれません。
+    </p>
+  </section>
+
+  <!-- 選ばれる理由 -->
+  <section>
+    <p class="eyebrow">REASON</p>
+    <h2>ことのはが<br>選ばれる3つの理由</h2>
+    <p class="h2-sub">「その場しのぎ」で終わらせないために</p>
+
+    <div class="reason-item">
+      <span class="reason-num">1</span>
+      <h3>強く揉まない。だから戻りにくい</h3>
+      <p>痛みの原因は、硬くなった筋肉そのものではなく、そこに負担をかけ続けている関節の使い方にあります。当サロンでは骨盤と背骨の位置を整えることを軸にするため、強い刺激を加えません。もみ返しが起きにくく、変化が長持ちします。</p>
+    </div>
+
+    <div class="reason-item">
+      <span class="reason-num">2</span>
+      <h3>国家資格保有者が最初から最後まで担当</h3>
+      <p>柔道整復師の資格をもつ施術者が、カウンセリングから施術、アフターケアの説明まで一貫して担当します。担当が毎回変わることはありません。あなたの体の変化を、同じ目で追い続けます。</p>
+    </div>
+
+    <div class="reason-item">
+      <span class="reason-num">3</span>
+      <h3>「通わせない」ための自宅ケア指導</h3>
+      <p>施術後には、その日の状態に合わせたセルフケアを2〜3分でできる形にしてお伝えします。回数券の押し売りは一切いたしません。ご自身でコントロールできる状態を目指します。</p>
+    </div>
+  </section>
+
+  <!-- 流れ -->
+  <section class="flow">
+    <p class="eyebrow">FLOW</p>
+    <h2>初回の流れ</h2>
+    <p class="h2-sub">所要時間 約60分</p>
+
+    <div class="flow-step">
+      <span class="flow-num">1</span>
+      <div class="flow-body">
+        <h3>カウンセリング（約15分）</h3>
+        <p>いつから、どんなときに痛むのか。お仕事や睡眠の姿勢まで丁寧に伺います。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <span class="flow-num">2</span>
+      <div class="flow-body">
+        <h3>検査・姿勢チェック（約10分）</h3>
+        <p>関節の可動域と重心の偏りを確認し、不調の原因がどこにあるのかを特定します。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <span class="flow-num">3</span>
+      <div class="flow-body">
+        <h3>施術（約25分）</h3>
+        <p>骨盤・背骨の調整を中心に、負担のかかっている部位を緩めていきます。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <span class="flow-num">4</span>
+      <div class="flow-body">
+        <h3>アフター説明（約10分）</h3>
+        <p>変化のご確認と、自宅でのセルフケアをお伝えします。次回のご提案は希望される方のみです。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 料金 -->
+  <section>
+    <p class="eyebrow">PRICE</p>
+    <h2>料金のご案内</h2>
+    <p class="h2-sub">追加料金・物販の販売は一切ありません</p>
+
+    <div class="price-card">
+      <span class="price-tag">WEB予約限定・初回のみ</span>
+      <p class="price-name">初回カウンセリング＋施術60分</p>
+      <p class="price-old">通常 7,700円</p>
+      <p class="price-now">3,980<small>円（税込）</small></p>
+      <p class="price-meta">当日のお支払い／現金・各種カード・QR決済</p>
+    </div>
+
+    <div class="price-sub">
+      <span>2回目以降（60分）</span>
+      <strong>6,600円</strong>
+    </div>
+  </section>
+
+  <!-- お客様の声 -->
+  <section class="voice">
+    <p class="eyebrow">VOICE</p>
+    <h2>お客様の声</h2>
+    <p class="h2-sub">※ サンプルページのため、内容は架空のものです</p>
+
+    <div class="voice-card">
+      <div class="voice-head">
+        <div class="voice-avatar"></div>
+        <div>
+          <p class="voice-name">30代・女性／事務職</p>
+          <p class="voice-stars">★★★★★</p>
+        </div>
+      </div>
+      <p>強く揉まれるのが苦手で整体を避けていましたが、こちらは本当に痛くありませんでした。施術中に「なぜここが硬くなるのか」を説明してもらえたのが良かったです。</p>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-head">
+        <div class="voice-avatar"></div>
+        <div>
+          <p class="voice-name">40代・男性／営業職</p>
+          <p class="voice-stars">★★★★★</p>
+        </div>
+      </div>
+      <p>朝の腰の重さが気にならなくなりました。教えてもらったストレッチが1分程度で終わるので、忙しくても続けられています。</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <p class="eyebrow">FAQ</p>
+    <h2>よくあるご質問</h2>
+    <p class="h2-sub">ご不明な点はお気軽にお尋ねください</p>
+
+    <details open>
+      <summary>施術は痛くありませんか？</summary>
+      <p>強い力で押したり揉んだりする施術は行いません。関節をやさしく動かしながら整えていくため、施術中に痛みを感じる方はほとんどいらっしゃいません。刺激の強さはいつでも調整いたします。</p>
+    </details>
+    <details>
+      <summary>何回くらい通えばいいですか？</summary>
+      <p>お体の状態によりますが、初回で変化を感じていただける方が多いです。回数券の販売や継続の強制は一切しておりませんので、ご自身のペースでご判断ください。</p>
+    </details>
+    <details>
+      <summary>どんな服装で行けばいいですか？</summary>
+      <p>お着替えを無料でご用意しております。お仕事帰りにそのままお越しいただいて問題ありません。</p>
+    </details>
+    <details>
+      <summary>予約なしでも施術を受けられますか？</summary>
+      <p>完全予約制のため、当日でも構いませんので事前にご予約をお願いいたします。空きがあれば当日のご案内も可能です。</p>
+    </details>
+  </section>
+
+  <!-- 店舗情報 -->
+  <section class="flow">
+    <p class="eyebrow">ACCESS</p>
+    <h2>店舗情報</h2>
+    <p class="h2-sub">本町駅から徒歩4分</p>
+    <table class="info-table">
+      <tr><th>店名</th><td>肩こり・腰痛専門整体サロン ことのは<br><span style="font-size:11.5px;color:#a09488;">（架空のサンプル店舗です）</span></td></tr>
+      <tr><th>住所</th><td>大阪市中央区本町 ○-○-○ ○○ビル3F</td></tr>
+      <tr><th>アクセス</th><td>地下鉄本町駅 3番出口より徒歩4分</td></tr>
+      <tr><th>営業時間</th><td>10:00〜21:00（最終受付20:00）</td></tr>
+      <tr><th>定休日</th><td>水曜日</td></tr>
+      <tr><th>お支払い</th><td>現金／各種クレジットカード／QR決済</td></tr>
+    </table>
+    <div class="map-placeholder">GOOGLE MAP</div>
+  </section>
+
+  <!-- 最終CTA -->
+  <section class="final" id="reserve">
+    <p class="eyebrow">RESERVATION</p>
+    <h2>まずは1回、<br>体の変化を確かめてください</h2>
+    <p class="h2-sub">初回60分 3,980円（税込）／24時間WEB受付</p>
+    <a href="#" class="btn">WEBで予約する</a>
+    <a href="#" class="btn btn-line">LINEで相談・予約する</a>
+    <p class="cta-note">お電話でのご予約：06-0000-0000（10:00〜21:00）</p>
+  </section>
+
+  <footer>
+    © 2026 整体サロン ことのは（架空）<br>
+    Portfolio sample — designed &amp; coded by 掃部託矢
+  </footer>
+
+</div>
+
+<nav class="sticky">
+  <a href="tel:0600000000" class="s-tel">電話で予約</a>
+  <a href="#reserve" class="s-web">WEB予約する</a>
+</nav>
+
+</body>
+</html>
