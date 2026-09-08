@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>売上CSV 自動集計レポート｜制作サンプル</title>
+<meta name="description" content="毎月手作業で集計していた売上CSVを、ドラッグ&ドロップだけでレポート化するツールの制作サンプルです。">
+<style>
+:root{
+  color-scheme: light;
+  --surface-0:#f4f6f8;
+  --surface-1:#fcfcfb;
+  --line:#e0e5ea;
+  --line-soft:#eef1f4;
+  --text-primary:#0b0b0b;
+  --text-secondary:#52514e;
+  --text-muted:#7c8894;
+  --series-1:#2a78d6;
+  --series-2:#eb6834;
+  --series-3:#1baf7a;
+  --accent-deep:#1b4a7d;
+  --warn-bg:#fff8e6;
+  --warn-line:#f0e0b8;
+  --warn-ink:#8a6d2f;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --surface-0:#121413;
+    --surface-1:#1a1a19;
+    --line:#33352f;
+    --line-soft:#262723;
+    --text-primary:#ffffff;
+    --text-secondary:#c3c2b7;
+    --text-muted:#8f8f86;
+    --series-1:#3987e5;
+    --series-2:#d95926;
+    --series-3:#199e70;
+    --accent-deep:#8fc7ea;
+    --warn-bg:#2a2415;
+    --warn-line:#4a3f22;
+    --warn-ink:#d8c48a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --surface-0:#121413;
+  --surface-1:#1a1a19;
+  --line:#33352f;
+  --line-soft:#262723;
+  --text-primary:#ffffff;
+  --text-secondary:#c3c2b7;
+  --text-muted:#8f8f86;
+  --series-1:#3987e5;
+  --series-2:#d95926;
+  --series-3:#199e70;
+  --accent-deep:#8fc7ea;
+  --warn-bg:#2a2415;
+  --warn-line:#4a3f22;
+  --warn-ink:#d8c48a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;
+  background:var(--surface-0);color:var(--text-primary);
+  line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px 72px;}
+
+/* ---------- demo banner ---------- */
+.demo-note{
+  background:var(--warn-bg);border-bottom:1px solid var(--warn-line);
+  color:var(--warn-ink);font-size:12.5px;padding:11px 20px;text-align:center;line-height:1.7;
+}
+
+/* ---------- hero ---------- */
+header{padding:52px 0 30px;}
+.eyebrow{font-size:11px;letter-spacing:.22em;font-weight:700;color:var(--series-1);margin-bottom:12px;}
+h1{font-size:29px;line-height:1.45;font-weight:700;margin-bottom:14px;letter-spacing:.01em;}
+.lede{color:var(--text-secondary);font-size:15px;max-width:660px;}
+.meta-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:22px;}
+.meta-tags span{
+  font-size:12px;padding:5px 12px;border-radius:100px;
+  border:1px solid var(--line);color:var(--text-secondary);background:var(--surface-1);
+}
+
+/* ---------- panel ---------- */
+.panel{
+  background:var(--surface-1);border:1px solid var(--line);
+  border-radius:12px;padding:26px;margin-bottom:22px;
+}
+.panel h2{font-size:17px;font-weight:700;margin-bottom:5px;}
+.panel .sub{font-size:13px;color:var(--text-muted);margin-bottom:20px;}
+
+/* ---------- dropzone ---------- */
+.drop{
+  border:2px dashed var(--line);border-radius:10px;
+  padding:34px 20px;text-align:center;transition:border-color .18s,background .18s;
+  cursor:pointer;background:transparent;
+}
+.drop:hover,.drop.over{border-color:var(--series-1);background:color-mix(in srgb,var(--series-1) 6%,transparent);}
+.drop-icon{font-size:26px;line-height:1;margin-bottom:10px;color:var(--text-muted);}
+.drop p{font-size:14px;color:var(--text-secondary);margin-bottom:4px;}
+.drop small{font-size:12px;color:var(--text-muted);}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;justify-content:center;}
+button{
+  font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;
+  border-radius:7px;padding:9px 18px;border:1px solid var(--line);
+  background:var(--surface-1);color:var(--text-primary);transition:background .15s,border-color .15s;
+}
+button:hover{border-color:var(--series-1);}
+button.primary{background:var(--series-1);border-color:var(--series-1);color:#fff;}
+button.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);}
+button:focus-visible{outline:2px solid var(--series-1);outline-offset:2px;}
+
+.status{font-size:13px;margin-top:14px;color:var(--text-secondary);text-align:center;min-height:20px;}
+.status.err{color:var(--series-2);font-weight:600;}
+
+/* ---------- stat tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+.tile{background:var(--surface-1);border:1px solid var(--line);border-radius:10px;padding:17px 18px;}
+.tile .label{font-size:11.5px;color:var(--text-muted);letter-spacing:.04em;margin-bottom:7px;}
+.tile .value{font-size:25px;font-weight:700;letter-spacing:-.015em;line-height:1.25;
+  font-variant-numeric:tabular-nums;}
+.tile .unit{font-size:13px;font-weight:600;color:var(--text-secondary);margin-left:2px;}
+.tile .note{font-size:11.5px;color:var(--text-muted);margin-top:5px;}
+
+/* ---------- charts ---------- */
+.chart-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:2px;flex-wrap:wrap;}
+.chart-box{position:relative;margin-top:16px;}
+svg{display:block;width:100%;height:auto;overflow:visible;}
+.grid-line{stroke:var(--line-soft);stroke-width:1;}
+.axis-text{fill:var(--text-muted);font-size:11px;font-family:inherit;}
+.axis-text.num{font-variant-numeric:tabular-nums;}
+.series-line{fill:none;stroke:var(--series-1);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;}
+.series-dot{fill:var(--series-1);stroke:var(--surface-1);stroke-width:2;}
+.bar-label{fill:var(--text-secondary);font-size:11.5px;font-family:inherit;font-variant-numeric:tabular-nums;}
+.bar-name{fill:var(--text-primary);font-size:12.5px;font-family:inherit;}
+.hover-band{fill:transparent;cursor:crosshair;}
+.crosshair{stroke:var(--text-muted);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none;}
+
+.tooltip{
+  position:absolute;pointer-events:none;opacity:0;transition:opacity .12s;
+  background:var(--text-primary);color:var(--surface-1);
+  font-size:12px;line-height:1.6;padding:7px 11px;border-radius:6px;white-space:nowrap;
+  transform:translate(-50%,-100%);z-index:5;font-variant-numeric:tabular-nums;
+}
+.tooltip b{font-size:13px;}
+
+/* ---------- table ---------- */
+.table-toggle{
+  font-size:12.5px;color:var(--series-1);background:none;border:none;padding:6px 0;
+  cursor:pointer;font-weight:600;
+}
+.table-scroll{overflow-x:auto;margin-top:12px;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{
+  text-align:left;font-weight:600;color:var(--text-secondary);
+  border-bottom:2px solid var(--line);padding:8px 10px;white-space:nowrap;
+}
+td{border-bottom:1px solid var(--line-soft);padding:8px 10px;font-variant-numeric:tabular-nums;}
+td.name{font-variant-numeric:normal;}
+th.num,td.num{text-align:right;}
+
+/* ---------- explain ---------- */
+.explain{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.explain h3{font-size:14px;margin-bottom:8px;}
+.explain p,.explain li{font-size:13.5px;color:var(--text-secondary);}
+.explain ul{padding-left:1.15em;}
+.explain li{margin-bottom:5px;}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
+.ba-card{border:1px solid var(--line);border-radius:9px;padding:15px 16px;}
+.ba-card .ttl{font-size:12px;font-weight:700;letter-spacing:.05em;margin-bottom:9px;}
+.ba-card.before .ttl{color:var(--series-2);}
+.ba-card.after .ttl{color:var(--series-3);}
+.ba-card ul{padding-left:1.1em;margin:0;}
+.ba-card li{font-size:12.5px;color:var(--text-secondary);margin-bottom:4px;}
+
+footer{border-top:1px solid var(--line);margin-top:8px;padding-top:22px;font-size:12.5px;color:var(--text-muted);}
+footer a{color:var(--series-1);}
+
+@media(max-width:820px){
+  .tiles{grid-template-columns:repeat(2,1fr);}
+  .explain{grid-template-columns:1fr;}
+  h1{font-size:23px;}
+}
+@media(max-width:560px){
+  .before-after{grid-template-columns:1fr;}
+  .panel{padding:20px 17px;}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-note">
+  これは制作サンプルです。表示しているデータは架空の店舗を想定して自動生成したもので、実在の企業・売上ではありません。
+</div>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">AUTOMATION / 制作サンプル</p>
+  <h1>毎月2時間の売上集計を、<br>ドラッグ&ドロップの数秒に</h1>
+  <p class="lede">
+    「月末に各店舗から送られてくるCSVを開いて、ピボットを組んで、グラフを貼って、報告書にまとめる」——
+    その一連の作業を、ファイルを置くだけで終わらせるツールです。実際に動きます。下のエリアにCSVを入れてお試しください。
+  </p>
+  <div class="meta-tags">
+    <span>JavaScript</span><span>CSV解析</span><span>自動集計</span><span>SVGグラフ生成</span><span>ブラウザ完結</span>
+  </div>
+</header>
+
+<section class="panel">
+  <h2>1. CSVを読み込む</h2>
+  <p class="sub">サーバーには一切送信されません。すべてブラウザ内で処理されるため、売上データが外部に出ません。</p>
+
+  <div class="drop" id="drop" tabindex="0" role="button" aria-label="CSVファイルを選択、またはドラッグ＆ドロップ">
+    <div class="drop-icon" aria-hidden="true">▤</div>
+    <p>CSVファイルをここにドラッグ＆ドロップ</p>
+    <small>またはクリックしてファイルを選択（日付・カテゴリ・金額の列を自動判別します）</small>
+  </div>
+  <input type="file" id="file" accept=".csv,text/csv" hidden>
+
+  <div class="btn-row">
+    <button class="primary" id="sample">サンプルデータで試す</button>
+    <button id="download">サンプルCSVをダウンロード</button>
+  </div>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+</section>
+
+<div id="report" hidden>
+
+  <div class="tiles" id="tiles"></div>
+
+  <section class="panel">
+    <div class="chart-head">
+      <div>
+        <h2>月別の売上推移</h2>
+        <p class="sub" style="margin-bottom:0">日付列を月単位に丸めて自動集計しています。</p>
+      </div>
+    </div>
+    <div class="chart-box" id="lineBox">
+      <svg id="lineChart" viewBox="0 0 720 260" role="img" aria-label="月別売上推移の折れ線グラフ"></svg>
+      <div class="tooltip" id="lineTip"></div>
+    </div>
+    <button class="table-toggle" id="tt1" aria-expanded="false">表で見る</button>
+    <div class="table-scroll" id="tbl1" hidden></div>
+  </section>
+
+  <section class="panel">
+    <div class="chart-head">
+      <div>
+        <h2>カテゴリ別の売上</h2>
+        <p class="sub" style="margin-bottom:0">金額の大きい順に並べ替えています。</p>
+      </div>
+    </div>
+    <div class="chart-box" id="barBox">
+      <svg id="barChart" viewBox="0 0 720 300" role="img" aria-label="カテゴリ別売上の横棒グラフ"></svg>
+      <div class="tooltip" id="barTip"></div>
+    </div>
+    <button class="table-toggle" id="tt2" aria-expanded="false">表で見る</button>
+    <div class="table-scroll" id="tbl2" hidden></div>
+  </section>
+
+</div>
+
+<section class="panel">
+  <h2>この仕組みで何が変わるか</h2>
+  <p class="sub">実際の業務でよくある「手作業の集計」を置き換えた場合の比較です。</p>
+  <div class="before-after">
+    <div class="ba-card before">
+      <p class="ttl">導入前</p>
+      <ul>
+        <li>各店舗のCSVを1つずつ開く</li>
+        <li>1つのシートに手でコピー＆ペースト</li>
+        <li>ピボットテーブルを組み直す</li>
+        <li>グラフを作って報告書に貼る</li>
+        <li>貼り忘れ・行のズレに毎回気を使う</li>
+      </ul>
+    </div>
+    <div class="ba-card after">
+      <p class="ttl">導入後</p>
+      <ul>
+        <li>ファイルを置く</li>
+        <li>集計・グラフ・要約が自動生成</li>
+        <li>列名が変わっても自動で判別</li>
+        <li>担当者が変わっても同じ結果になる</li>
+        <li>データは外部に送信されない</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>技術的なポイント</h2>
+  <div class="explain" style="margin-top:14px">
+    <div>
+      <h3>列の自動判別</h3>
+      <p>「日付」「売上日」「date」など表記の揺れを吸収し、値の中身も見て日付列・金額列・カテゴリ列を推定します。ヘッダー名が現場ごとに違っても動きます。</p>
+    </div>
+    <div>
+      <h3>外部ライブラリを使わない</h3>
+      <p>CSV解析もグラフ描画も自前です。読み込みが速く、ライブラリの更新やライセンスに縛られません。グラフはSVGで生成しているため拡大しても劣化しません。</p>
+    </div>
+    <div>
+      <h3>データを外に出さない設計</h3>
+      <p>すべてブラウザ内で完結します。売上や顧客情報を含むファイルを扱う業務では、この点が導入可否を分けることが多いためです。</p>
+    </div>
+    <div>
+      <h3>読み手への配慮</h3>
+      <p>グラフは色だけに頼らず、数値を直接ラベル表示し、表形式でも確認できるようにしています。ダークモードにも対応しています。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>掃部 託矢（かもん たくや）｜制作サンプル　—
+  <a href="../">ポートフォリオ一覧に戻る</a></p>
+  <p style="margin-top:6px">
+    同様の自動化のご相談は、ランサーズ・クラウドワークスよりお問い合わせください。
+    Excel／スプレッドシートの集計、Webからのデータ収集、フォームとチャットの連携などに対応しています。
+  </p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var $ = function(id){ return document.getElementById(id); };
+  var yen = function(n){ return '¥' + Math.round(n).toLocaleString('ja-JP'); };
+  var manEn = function(n){
+    if (n >= 100000000) return (n/100000000).toFixed(2) + '億円';
+    if (n >= 10000) return Math.round(n/10000).toLocaleString('ja-JP') + '万円';
+    return Math.round(n).toLocaleString('ja-JP') + '円';
+  };
+
+  /* ---------------- CSV parsing (RFC4180-ish, handles quotes) ---------------- */
+  function parseCSV(text){
+    text = text.replace(/^﻿/, '');
+    var rows = [], row = [], field = '', inQ = false, i = 0;
+    while (i < text.length){
+      var c = text[i];
+      if (inQ){
+        if (c === '"'){
+          if (text[i+1] === '"'){ field += '"'; i += 2; continue; }
+          inQ = false; i++; continue;
+        }
+        field += c; i++; continue;
+      }
+      if (c === '"'){ inQ = true; i++; continue; }
+      if (c === ','){ row.push(field); field = ''; i++; continue; }
+      if (c === '\r'){ i++; continue; }
+      if (c === '\n'){ row.push(field); rows.push(row); row = []; field = ''; i++; continue; }
+      field += c; i++;
+    }
+    if (field.length || row.length){ row.push(field); rows.push(row); }
+    return rows.filter(function(r){ return r.some(function(v){ return String(v).trim() !== ''; }); });
+  }
+
+  /* ---------------- column detection ---------------- */
+  var DATE_HINTS = ['日付','売上日','受注日','年月日','date','day','日時','取引日'];
+  var AMT_HINTS  = ['金額','売上','売上金額','価格','合計','amount','sales','price','total','単価'];
+  var CAT_HINTS  = ['カテゴリ','分類','商品','商品名','店舗','部門','区分','種別','category','item','product','shop','name'];
+
+  function parseDate(v){
+    if (v == null) return null;
+    var s = String(v).trim();
+    if (!s) return null;
+    var m = s.match(/^(\d{4})[\/\-年.](\d{1,2})[\/\-月.](\d{1,2})/);
+    if (m) return { y:+m[1], m:+m[2] };
+    m = s.match(/^(\d{4})[\/\-年.](\d{1,2})$/);
+    if (m) return { y:+m[1], m:+m[2] };
+    var d = new Date(s);
+    if (!isNaN(d.getTime()) && s.length >= 6) return { y:d.getFullYear(), m:d.getMonth()+1 };
+    return null;
+  }
+
+  function parseNum(v){
+    if (v == null) return null;
+    var s = String(v).replace(/[,¥￥\s円]/g,'').trim();
+    if (s === '' || !/^-?\d+(\.\d+)?$/.test(s)) return null;
+    return parseFloat(s);
+  }
+
+  function score(header, hints){
+    var h = String(header).toLowerCase().trim();
+    for (var i=0;i<hints.length;i++){
+      var k = hints[i].toLowerCase();
+      if (h === k) return 100;
+      if (h.indexOf(k) !== -1) return 60;
+    }
+    return 0;
+  }
+
+  function detect(headers, rows){
+    var n = headers.length;
+    var sample = rows.slice(0, Math.min(rows.length, 80));
+    var dateHit = [], numHit = [], uniq = [];
+    for (var c=0;c<n;c++){
+      var dh=0, nh=0, set={}, cnt=0;
+      for (var r=0;r<sample.length;r++){
+        var v = sample[r][c];
+        if (v == null || String(v).trim()==='') continue;
+        cnt++;
+        if (parseDate(v)) dh++;
+        if (parseNum(v) !== null) nh++;
+        set[String(v)] = 1;
+      }
+      dateHit.push(cnt ? dh/cnt : 0);
+      numHit.push(cnt ? nh/cnt : 0);
+      uniq.push(Object.keys(set).length);
+    }
+    function pick(hints, extra){
+      var best = -1, bestScore = -1;
+      for (var c=0;c<n;c++){
+        var s = score(headers[c], hints) + extra(c);
+        if (s > bestScore){ bestScore = s; best = c; }
+      }
+      return bestScore > 0 ? best : -1;
+    }
+    var dateCol = pick(DATE_HINTS, function(c){ return dateHit[c] * 50; });
+    var amtCol  = pick(AMT_HINTS,  function(c){ return c === dateCol ? -999 : numHit[c] * 45; });
+    var catCol  = pick(CAT_HINTS,  function(c){
+      if (c === dateCol || c === amtCol) return -999;
+      if (numHit[c] > 0.8) return -50;
+      var u = uniq[c];
+      if (u <= 1) return -30;
+      if (u > sample.length * 0.7) return -20;
+      return 30;
+    });
+    return { date:dateCol, amount:amtCol, category:catCol };
+  }
+
+  /* ---------------- aggregation ---------------- */
+  function aggregate(headers, rows, cols){
+    var byMonth = {}, byCat = {}, total = 0, count = 0;
+    for (var r=0;r<rows.length;r++){
+      var amt = cols.amount >= 0 ? parseNum(rows[r][cols.amount]) : null;
+      if (amt === null) continue;
+      total += amt; count++;
+      if (cols.date >= 0){
+        var d = parseDate(rows[r][cols.date]);
+        if (d){
+          var key = d.y + '-' + String(d.m).padStart(2,'0');
+          byMonth[key] = (byMonth[key] || 0) + amt;
+        }
+      }
+      if (cols.category >= 0){
+        var cat = String(rows[r][cols.category] || '未分類').trim() || '未分類';
+        byCat[cat] = (byCat[cat] || 0) + amt;
+      }
+    }
+    var months = Object.keys(byMonth).sort().map(function(k){ return { key:k, value:byMonth[k] }; });
+    var cats = Object.keys(byCat).map(function(k){ return { key:k, value:byCat[k] }; })
+                 .sort(function(a,b){ return b.value - a.value; });
+    if (cats.length > 8){
+      var head = cats.slice(0,7);
+      var restSum = cats.slice(7).reduce(function(s,x){ return s + x.value; }, 0);
+      head.push({ key:'その他（' + (cats.length-7) + '件）', value:restSum });
+      cats = head;
+    }
+    return { months:months, cats:cats, total:total, count:count };
+  }
+
+  /* ---------------- charts ---------------- */
+  function drawLine(data){
+    var svg = $('lineChart'), tip = $('lineTip'), box = $('lineBox');
+    svg.innerHTML = '';
+    if (!data.length){
+      svg.innerHTML = '<text x="360" y="130" text-anchor="middle" class="axis-text">日付列が見つかりませんでした</text>';
+      return;
+    }
+    var W = 720, H = 260, mL = 66, mR = 18, mT = 18, mB = 34;
+    var iw = W - mL - mR, ih = H - mT - mB;
+    var max = Math.max.apply(null, data.map(function(d){ return d.value; }));
+    // 目盛りが4分割でキリのいい数字になるステップを選ぶ
+    var niceMax = (function(mx){
+      if (!isFinite(mx) || mx <= 0) return 1;
+      var rough = mx / 4;
+      var mag = Math.pow(10, Math.floor(Math.log10(rough)));
+      var mults = [1, 2, 2.5, 5, 10];
+      for (var i=0;i<mults.length;i++){
+        var step = mults[i] * mag;
+        if (step * 4 >= mx) return step * 4;
+      }
+      return Math.ceil(mx/mag)*mag;
+    })(max);
+    var x = function(i){ return mL + (data.length === 1 ? iw/2 : iw * i / (data.length - 1)); };
+    var y = function(v){ return mT + ih - (v / niceMax) * ih; };
+    var ns = 'http://www.w3.org/2000/svg';
+    function el(t, a){ var e = document.createElementNS(ns, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+
+    for (var t=0;t<=4;t++){
+      var v = niceMax * t / 4, yy = y(v);
+      svg.appendChild(el('line', { x1:mL, y1:yy, x2:W-mR, y2:yy, class:'grid-line' }));
+      var lab = el('text', { x:mL-10, y:yy+4, class:'axis-text num', 'text-anchor':'end' });
+      lab.textContent = manEn(v);
+      svg.appendChild(lab);
+    }
+    var step = Math.ceil(data.length / 8);
+    data.forEach(function(d, i){
+      if (i % step !== 0 && i !== data.length-1) return;
+      var lab = el('text', { x:x(i), y:H-mB+20, class:'axis-text', 'text-anchor':'middle' });
+      lab.textContent = d.key.replace('-', '/');
+      svg.appendChild(lab);
+    });
+
+    var path = data.map(function(d,i){ return (i?'L':'M') + x(i).toFixed(1) + ' ' + y(d.value).toFixed(1); }).join(' ');
+    svg.appendChild(el('path', { d:path, class:'series-line' }));
+
+    var cross = el('line', { y1:mT, y2:mT+ih, class:'crosshair' });
+    svg.appendChild(cross);
+
+    data.forEach(function(d,i){
+      svg.appendChild(el('circle', { cx:x(i), cy:y(d.value), r:4, class:'series-dot' }));
+    });
+
+    data.forEach(function(d,i){
+      var half = data.length > 1 ? iw / (data.length-1) / 2 : iw/2;
+      var band = el('rect', {
+        x: Math.max(mL, x(i)-half), y: mT,
+        width: Math.min(half*2, iw), height: ih, class:'hover-band'
+      });
+      band.addEventListener('mouseenter', function(){
+        cross.setAttribute('x1', x(i)); cross.setAttribute('x2', x(i));
+        cross.style.opacity = '1';
+        tip.innerHTML = '<b>' + yen(d.value) + '</b><br>' + d.key.replace('-','年') + '月';
+        tip.style.opacity = '1';
+        var rect = box.getBoundingClientRect();
+        tip.style.left = (x(i) / W * rect.width) + 'px';
+        tip.style.top  = (y(d.value) / H * rect.height - 10) + 'px';
+      });
+      band.addEventListener('mouseleave', function(){
+        cross.style.opacity = '0'; tip.style.opacity = '0';
+      });
+      svg.appendChild(band);
+    });
+  }
+
+  function drawBar(data){
+    var svg = $('barChart'), tip = $('barTip'), box = $('barBox');
+    svg.innerHTML = '';
+    if (!data.length){
+      svg.innerHTML = '<text x="360" y="150" text-anchor="middle" class="axis-text">カテゴリ列が見つかりませんでした</text>';
+      return;
+    }
+    var W = 720, rowH = 34, mT = 10, mL = 150, mR = 92;
+    var H = mT + data.length * rowH + 10;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var iw = W - mL - mR;
+    var max = Math.max.apply(null, data.map(function(d){ return d.value; })) || 1;
+    var ns = 'http://www.w3.org/2000/svg';
+    function el(t, a){ var e = document.createElementNS(ns, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+
+    data.forEach(function(d, i){
+      var yy = mT + i * rowH;
+      var bw = Math.max(2, iw * d.value / max);
+      var name = el('text', { x:mL-12, y:yy+20, class:'bar-name', 'text-anchor':'end' });
+      name.textContent = d.key.length > 11 ? d.key.slice(0,10) + '…' : d.key;
+      svg.appendChild(name);
+
+      var bar = el('rect', { x:mL, y:yy+7, width:bw, height:18, rx:4, fill:'var(--series-1)' });
+      svg.appendChild(bar);
+
+      var val = el('text', { x:mL+bw+10, y:yy+20, class:'bar-label' });
+      val.textContent = manEn(d.value);
+      svg.appendChild(val);
+
+      var hit = el('rect', { x:0, y:yy, width:W, height:rowH, class:'hover-band' });
+      hit.addEventListener('mouseenter', function(){
+        bar.setAttribute('fill','var(--accent-deep)');
+        var pct = (d.value / data.reduce(function(s,x){return s+x.value;},0) * 100).toFixed(1);
+        tip.innerHTML = '<b>' + d.key + '</b><br>' + yen(d.value) + '（' + pct + '%）';
+        tip.style.opacity = '1';
+        var rect = box.getBoundingClientRect();
+        tip.style.left = ((mL + bw/2) / W * rect.width) + 'px';
+        tip.style.top  = ((yy+4) / H * rect.height) + 'px';
+      });
+      hit.addEventListener('mouseleave', function(){
+        bar.setAttribute('fill','var(--series-1)');
+        tip.style.opacity = '0';
+      });
+      svg.appendChild(hit);
+    });
+  }
+
+  function makeTable(rows, headA, headB){
+    var h = '<table><thead><tr><th>' + headA + '</th><th class="num">' + headB + '</th></tr></thead><tbody>';
+    rows.forEach(function(d){
+      h += '<tr><td class="name">' + d.key.replace(/</g,'&lt;') + '</td><td class="num">' + yen(d.value) + '</td></tr>';
+    });
+    return h + '</tbody></table>';
+  }
+
+  /* ---------------- render ---------------- */
+  function render(headers, rows){
+    var cols = detect(headers, rows);
+    if (cols.amount < 0){
+      setStatus('金額らしき列が見つかりませんでした。数値の入った列を含むCSVをお試しください。', true);
+      return;
+    }
+    var agg = aggregate(headers, rows, cols);
+    if (!agg.count){
+      setStatus('集計できる数値がありませんでした。', true);
+      return;
+    }
+
+    var avg = agg.total / agg.count;
+    var growth = null;
+    if (agg.months.length >= 2){
+      var last = agg.months[agg.months.length-1].value;
+      var prev = agg.months[agg.months.length-2].value;
+      if (prev > 0) growth = (last - prev) / prev * 100;
+    }
+    var topCat = agg.cats.length ? agg.cats[0] : null;
+
+    var tiles = [
+      { label:'売上合計', value: manEn(agg.total), note: agg.count.toLocaleString('ja-JP') + '件の明細から集計' },
+      { label:'平均単価', value: yen(avg), note:'1件あたり' },
+      { label:'前月比', value: growth === null ? '—' : (growth >= 0 ? '+' : '') + growth.toFixed(1) + '%',
+        note: agg.months.length >= 2 ? agg.months[agg.months.length-1].key.replace('-','年') + '月時点' : '月次データなし' },
+      { label:'最大カテゴリ', value: topCat ? (topCat.key.length > 7 ? topCat.key.slice(0,6)+'…' : topCat.key) : '—',
+        note: topCat ? manEn(topCat.value) + '（' + (topCat.value/agg.total*100).toFixed(0) + '%）' : 'カテゴリ列なし' }
+    ];
+    $('tiles').innerHTML = tiles.map(function(t){
+      return '<div class="tile"><p class="label">' + t.label + '</p>' +
+             '<p class="value">' + t.value + '</p>' +
+             '<p class="note">' + t.note + '</p></div>';
+    }).join('');
+
+    drawLine(agg.months);
+    drawBar(agg.cats);
+    $('tbl1').innerHTML = makeTable(agg.months, '年月', '売上');
+    $('tbl2').innerHTML = makeTable(agg.cats, 'カテゴリ', '売上');
+
+    $('report').hidden = false;
+    var detected = [];
+    if (cols.date >= 0) detected.push('日付=「' + headers[cols.date] + '」');
+    if (cols.amount >= 0) detected.push('金額=「' + headers[cols.amount] + '」');
+    if (cols.category >= 0) detected.push('カテゴリ=「' + headers[cols.category] + '」');
+    setStatus('読み込み完了：' + rows.length.toLocaleString('ja-JP') + '行　／　自動判別した列 → ' + detected.join('、'));
+  }
+
+  function setStatus(msg, isErr){
+    var s = $('status');
+    s.textContent = msg;
+    s.className = 'status' + (isErr ? ' err' : '');
+  }
+
+  function handleText(text){
+    var rows = parseCSV(text);
+    if (rows.length < 2){ setStatus('データ行が見つかりませんでした。', true); return; }
+    render(rows[0], rows.slice(1));
+  }
+
+  function handleFile(f){
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function(){ handleText(String(reader.result)); };
+    reader.onerror = function(){ setStatus('ファイルを読み込めませんでした。', true); };
+    reader.readAsText(f, 'UTF-8');
+  }
+
+  /* ---------------- sample data ---------------- */
+  function sampleCSV(){
+    var cats = ['ランチセット','ディナーコース','ドリンク','テイクアウト','デザート','物販'];
+    var base = { 'ランチセット':1200, 'ディナーコース':4800, 'ドリンク':550, 'テイクアウト':900, 'デザート':650, '物販':1800 };
+    var lines = ['売上日,商品カテゴリ,商品名,数量,売上金額'];
+    var seed = 20260101;
+    function rnd(){ seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
+    for (var m=1; m<=9; m++){
+      // ゆるやかな成長 + 季節変動。明細数を増やしてノイズを抑える
+      var season = 1 + (m-1)*0.035 + Math.sin((m-4)/12*Math.PI*2) * 0.07;
+      for (var k=0; k<95; k++){
+        var day = 1 + Math.floor(rnd()*28);
+        var cat = cats[Math.floor(rnd()*cats.length)];
+        var qty = 1 + Math.floor(rnd()*4);
+        var amt = Math.round(base[cat] * qty * season * (0.85 + rnd()*0.3));
+        lines.push('2026/' + String(m).padStart(2,'0') + '/' + String(day).padStart(2,'0') +
+                   ',' + cat + ',' + cat + Math.ceil(rnd()*3) + '号,' + qty + ',' + amt);
+      }
+    }
+    return lines.join('\n');
+  }
+
+  /* ---------------- wiring ---------------- */
+  var drop = $('drop'), fileInput = $('file');
+  drop.addEventListener('click', function(){ fileInput.click(); });
+  drop.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileInput.click(); }
+  });
+  fileInput.addEventListener('change', function(){ handleFile(fileInput.files[0]); });
+  ['dragenter','dragover'].forEach(function(ev){
+    drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); });
+  });
+  ['dragleave','drop'].forEach(function(ev){
+    drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); });
+  });
+  drop.addEventListener('drop', function(e){
+    var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) handleFile(f); else setStatus('ファイルを認識できませんでした。', true);
+  });
+
+  $('sample').addEventListener('click', function(){ handleText(sampleCSV()); });
+
+  $('download').addEventListener('click', function(){
+    var blob = new Blob(['﻿' + sampleCSV()], { type:'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'sample_sales.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+  });
+
+  function bindToggle(btnId, boxId){
+    $(btnId).addEventListener('click', function(){
+      var box = $(boxId), open = !box.hidden;
+      box.hidden = open;
+      $(btnId).textContent = open ? '表で見る' : '表を閉じる';
+      $(btnId).setAttribute('aria-expanded', String(!open));
+    });
+  }
+  bindToggle('tt1','tbl1');
+  bindToggle('tt2','tbl2');
+
+  window.addEventListener('resize', function(){
+    $('lineTip').style.opacity = '0';
+    $('barTip').style.opacity = '0';
+  });
+
+  handleText(sampleCSV());
+})();
+</script>
+</body>
+</html>
