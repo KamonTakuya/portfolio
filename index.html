@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>掃部託矢 ポートフォリオ｜Web制作・ライティング</title>
-<meta name="description" content="LP制作、コーポレートサイト制作、記事執筆のポートフォリオ。AIを活用した制作でコストと速度を両立します。">
+<title>KAMON DESIGN｜1ページからのWeb改善・LP制作</title>
+<meta name="description" content="店舗・教室・個人事業のWebサイトを、1ページから改善。文章・相談ボタン・スマホ表示を整理し、修正前後と確認結果をお渡しします。自主制作の比較デモ、対応範囲、料金目安を掲載。">
 <style>
 :root{
   --ink:#1c2430;--ink-soft:#5f6b7a;--line:#e3e8ee;
@@ -17,6 +17,10 @@ body{
   letter-spacing:.02em;-webkit-font-smoothing:antialiased;
 }
 a{color:inherit;}
+a:focus-visible,summary:focus-visible{outline:3px solid #d88a22;outline-offset:5px;}
+html{scroll-behavior:smooth;scroll-padding-top:24px;}
+.skip{position:absolute;left:12px;top:-100px;background:#fff;color:var(--ink);padding:12px;z-index:10;}
+.skip:focus{top:12px;}
 img{max-width:100%;display:block;}
 .container{max-width:920px;margin:0 auto;padding:0 24px;}
 
@@ -103,6 +107,32 @@ h2{font-size:26px;font-weight:700;margin-bottom:12px;line-height:1.5;}
 .contact{background:linear-gradient(150deg,#152a42,#1e4a72);color:#fff;text-align:center;}
 .contact h2{color:#fff;}
 .contact p{color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 8px;font-size:14.5px;}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:11px 20px;border:1px solid currentColor;border-radius:8px;font-weight:700;text-decoration:none;line-height:1.5;}
+.button-primary{background:#fff;color:#1b4a7d;border-color:#fff;}
+.button-blue{background:var(--accent-deep);color:#fff;border-color:var(--accent-deep);}
+.button:hover{filter:brightness(.94);}
+.hero .small{font-size:12px;margin-top:16px;}
+.feature{background:#eef5fb;border:1px solid #bcd3e5;border-radius:12px;padding:30px;margin-bottom:30px;}
+.feature p{color:var(--ink-soft);margin-top:10px;}
+.feature h3{font-size:22px;line-height:1.5;}
+.eyebrow{font-size:12px;color:var(--accent-deep);font-weight:700;letter-spacing:.08em;}
+.price{font-size:25px;font-weight:700;color:var(--accent-deep);margin:12px 0;}
+.price small{font-size:12px;font-weight:400;}
+.service-list{padding-left:1.2em;font-size:13px;margin:12px 0;color:var(--ink-soft);}
+.delivery{border-top:1px solid var(--line);padding-top:12px;font-size:12px!important;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:step;}
+.step{border-top:2px solid var(--accent);padding-top:18px;}
+.step h3{font-size:17px;margin-bottom:8px;}
+.step p{font-size:13.5px;color:var(--ink-soft);}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0;}
+.faq summary{cursor:pointer;font-weight:700;}
+.faq details p{font-size:14px;color:var(--ink-soft);margin-top:12px;}
+.contact .actions{justify-content:center;}
+.contact .request{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);padding:18px;border-radius:8px;margin:24px auto;text-align:left;color:#fff;max-width:550px;}
+.contact .small{font-size:12px;margin-top:18px;}
+.nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:35px;font-size:13px;}
+.nav a{text-underline-offset:5px;}
 
 footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12.5px;text-align:center;}
 
@@ -114,6 +144,8 @@ footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12
 @media(max-width:760px){
   .works{grid-template-columns:1fr;}
   .skill-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr;}
+  .feature{padding:23px;}
   .hero h1{font-size:26px;}
   .hero{padding:56px 0 50px;}
   section{padding:54px 0;}
@@ -121,32 +153,51 @@ footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12
   .about-list li{flex-direction:column;gap:2px;}
   .about-list b{width:auto;}
 }
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
 </style>
 </head>
 <body>
+<a href="#main" class="skip">本文へ移動</a>
 
 <div class="hero">
   <div class="container">
-    <span class="hero-label">PORTFOLIO</span>
-    <h1>掃部 託矢<br>Web制作・ライティング</h1>
-    <p>フリーランス（個人事業主）として、LP・コーポレートサイトの制作と記事執筆を行っています。生成AIを土台づくりに活用し、細部は人の目で仕上げることで、コストと速度を両立させる進め方を得意としています。</p>
+    <nav class="nav" aria-label="ページ内メニュー"><a href="#services">サービス・料金</a><a href="#works">制作見本</a><a href="#contact">相談する</a></nav>
+    <span class="hero-label">KAMON DESIGN</span>
+    <h1>「何を頼める？ どこから相談？」<br>その迷いを、1ページから整える。</h1>
+    <p>店舗・教室・個人事業のWebサイトに。伝わりにくい文章、見つけにくい相談ボタン、スマホの表示崩れをまとめて確認。必要な箇所を修正し、変更前後と確認結果をお渡しします。</p>
+    <div class="actions"><a class="button button-primary" href="05-site-improvement/">修正前後のデモを見る →</a><a class="button" href="#contact">URLを送って相談する</a></div>
+    <p class="small">HTML / CSSの部分修正・静的LP制作を中心に対応。制作見本は自主制作です。</p>
     <div class="hero-tags">
       <span>LP制作</span>
-      <span>コーポレートサイト</span>
-      <span>HTML / CSS</span>
-      <span>レスポンシブ対応</span>
-      <span>WordPress</span>
-      <span>記事執筆</span>
-      <span>AI活用</span>
+      <span>1ページからの改善</span>
+      <span>文章＋相談導線</span>
+      <span>スマホ表示確認</span>
+      <span>修正内容の報告つき</span>
     </div>
   </div>
 </div>
 
-<section>
+<main id="main">
+<section id="services" class="skills">
+  <div class="container">
+    <p class="sec-label">SERVICES</p>
+    <h2>困っている範囲から、頼めます。</h2>
+    <p class="sec-lead">先に「直す箇所・納品物・費用・納期」を決めてから着手します。下記は税込の制作料金目安です。既存コードと素材の確認後に正式なお見積もりをお送りします。</p>
+    <div class="skill-grid">
+      <article class="skill"><h3>まずは部分修正</h3><div class="price">15,000円〜</div><p>直したい場所が決まっている方へ。</p><ul class="service-list"><li>静的な1ページ・軽微な修正3箇所まで</li><li>支給文章・画像の差し替え、余白・文字サイズ等</li><li>修正箇所のPC・スマホ表示確認</li><li>変更内容の一覧</li></ul><p class="delivery">目安：素材・仕様確定後3〜5営業日<br>合意範囲の調整1回を含みます。</p></article>
+      <article class="skill"><h3>文章と相談導線の改善</h3><div class="price">30,000円〜</div><p>サービス内容や相談方法を整理したい方へ。</p><ul class="service-list"><li>静的な1ページ・改善5項目まで</li><li>支給情報から文章を整理（500字まで）</li><li>相談ボタン1種類の文言・配置調整</li><li>修正前後の画像・表示とリンクの確認報告</li></ul><p class="delivery">目安：素材・仕様確定後5〜7営業日<br>合意範囲の調整1回を含みます。</p></article>
+      <article class="skill"><h3>サービス紹介LP制作</h3><div class="price">55,000円〜</div><p>1つのサービスを紹介するページが必要な方へ。</p><ul class="service-list"><li>静的な1ページ・6セクションまで</li><li>支給原稿・写真をもとに構成整理</li><li>HTML / CSS実装・スマホ対応</li><li>既存の相談先へのリンク・確認報告</li></ul><p class="delivery">目安：素材・仕様確定後7〜10営業日<br>合意範囲の調整2回を含みます。</p></article>
+    </div>
+    <p class="note">料金・日数は内容によって変わります。追加ページ、構成の大幅変更、CMS改修、予約・決済システム、写真撮影、有料素材・サーバー費用は含みません。公開作業の可否・費用も事前に確認します。追加対応は、お見積もりに同意いただいてから進めます。</p>
+  </div>
+</section>
+
+<section id="works">
   <div class="container">
     <p class="sec-label">WORKS</p>
-    <h2>制作物</h2>
-    <p class="sec-lead">いずれも架空の企業・店舗を想定して制作したサンプルです。実在の企業・店舗ではありません。</p>
+    <h2>説明だけでなく、動く見本で。</h2>
+    <p class="sec-lead">以下は自主制作の見本です。実在のお客様への納品実績・売上改善実績ではありません。依頼を検討する際の、仕上がりや進め方の参考にしてください。</p>
+    <article class="feature"><span class="eyebrow">NEW / 自主制作・改善デモ</span><h3>教室の体験ページを、相談しやすく。</h3><p>料金と持ち物を整理し、曖昧だったボタンを「体験日程を相談する」に変更。修正前・修正後の切り替えと、納品時の変更報告の見本を用意しました。</p><div class="actions"><a class="button button-blue" href="05-site-improvement/">3つの変更と比較デモを見る →</a></div></article>
 
     <div class="works">
 
@@ -154,7 +205,7 @@ footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12
         <div class="work-thumb thumb-salon"><span>LANDING PAGE</span></div>
         <div class="work-body">
           <h3>整体サロンの集客用LP</h3>
-          <p>スマートフォン最適化の1ページ完結型。悩みの提示から予約導線まで、離脱させない構成を意識しました。固定フッターCTA、FAQアコーディオンを実装。</p>
+          <p>架空の整体サロンを想定した自主制作。サービス紹介・料金・FAQ・予約への案内を1ページに整理しています。実際の予約はできません。</p>
           <div class="work-meta">
             <em>HTML / CSS</em><em>スマホ最適化</em><em>CV導線設計</em>
           </div>
@@ -178,7 +229,7 @@ footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12
         <div class="work-thumb thumb-tool"><span>AUTOMATION</span></div>
         <div class="work-body">
           <h3>売上CSVの自動集計レポート</h3>
-          <p>毎月の手作業だった売上集計を、ファイルをドラッグするだけで完了させるツールです。列名の表記揺れを自動で判別し、グラフと要約まで生成します。ブラウザ上で実際に動きます。</p>
+          <p>売上CSVの集計を想定した自主制作ツール。サンプルデータで集計とグラフ表示を試せます。顧客への導入実績を示すものではありません。</p>
           <div class="work-meta">
             <em>JavaScript</em><em>CSV解析</em><em>SVGグラフ生成</em>
           </div>
@@ -198,23 +249,10 @@ footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12
         </div>
       </a>
 
-      <a href="03-articles/02_%E7%A4%BE%E4%BC%9A%E4%BA%BA1%E5%B9%B4%E7%9B%AE%E3%81%AB%E3%82%84%E3%81%A3%E3%81%A6%E8%89%AF%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8.md" class="work">
-        <div class="work-thumb thumb-article"><span>WRITING</span></div>
-        <div class="work-body">
-          <h3>体験談記事「社会人1年目にやって良かったこと」</h3>
-          <p>実際にクラウドワークスの案件として納品し、クライアントの検収が完了した記事です。指定構成（タイトル＋導入文＋本文＋まとめ）に沿って執筆。</p>
-          <div class="work-meta">
-            <em>約500字</em><em>納品実績</em><em>体験談</em>
-          </div>
-          <p class="work-link">記事を読む →</p>
-        </div>
-      </a>
-
     </div>
 
     <p class="note">
-      ※ サンプル作品は、実在の企業・店舗を装うことのないよう、各ページ上部に架空である旨を明記しています。自動集計ツールで表示されるデータも自動生成した架空のものです。<br>
-      ※ 実案件の納品物については、クライアント様の許可を得たもののみ掲載しております。
+      ※ サロン・企業・教室の名称や設定、集計ツールのサンプルデータは架空です。表示や構成の工夫を説明するための見本であり、問い合わせ数・売上の増加を保証するものではありません。
     </p>
   </div>
 </section>
@@ -222,21 +260,21 @@ footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12
 <section class="skills">
   <div class="container">
     <p class="sec-label">SKILLS</p>
-    <h2>対応できること</h2>
-    <p class="sec-lead">制作から公開、その後の更新までを一貫してお引き受けします。</p>
+    <h2>依頼前から納品まで、内容が見える進め方。</h2>
+    <p class="sec-lead">小さく範囲を決め、文章と画面を一緒に確認します。</p>
 
     <div class="skill-grid">
       <div class="skill">
-        <h3>Web制作</h3>
-        <p>LP・コーポレートサイトの企画構成、デザイン、HTML/CSSコーディング、レスポンシブ対応、公開設定まで。WordPress・Shopifyでの構築にも対応します。</p>
+        <h3>01｜直す理由を共有</h3>
+        <p>対象ページと目的を確認し、「どこで迷うか」「何を伝えるか」を整理。作業箇所と対応できる範囲を、着手前にお伝えします。</p>
       </div>
       <div class="skill">
-        <h3>ライティング</h3>
-        <p>ビジネス・キャリア・暮らし分野の記事執筆。構成設計から執筆、推敲まで。読者が何を知りたいかを起点に組み立てます。</p>
+        <h3>02｜文章と画面を合わせる</h3>
+        <p>HTML / CSSの修正に加え、支給いただいた情報から見出しや案内文を整理。ボタンを押した後の行動まで分かる形にします。</p>
       </div>
       <div class="skill">
-        <h3>AI活用・業務自動化</h3>
-        <p>生成AIを2〜3年使用。記事の量産や同一構造ページの展開など、繰り返し作業を仕組み化して品質を揃えたまま速度を出します。</p>
+        <h3>03｜確認結果を添えて納品</h3>
+        <p>変更一覧と、合意した画面幅での表示・リンク確認結果をお渡しします。改善プランでは修正前後の画像も添付し、変更点を確認しやすくします。</p>
       </div>
     </div>
   </div>
@@ -250,23 +288,31 @@ footer{background:#0e1c2b;color:rgba(255,255,255,.5);padding:28px 0;font-size:12
       <li><b>氏名</b><span>掃部 託矢（かもん たくや）</span></li>
       <li><b>形態</b><span>フリーランス／個人事業主</span></li>
       <li><b>拠点</b><span>大阪府（フルリモート対応）</span></li>
-      <li><b>業務内容</b><span>Web制作、記事制作、AI活用による業務自動化、ソフトウェア・アプリ開発</span></li>
-      <li><b>使用ツール</b><span>VS Code / Git / Figma / Canva / WordPress / 生成AI各種</span></li>
+      <li><b>屋号・表示名</b><span>KAMON DESIGN</span></li>
+      <li><b>業務内容</b><span>HTML / CSSのWeb制作・部分修正、文章の整理・記事執筆</span></li>
+      <li><b>制作について</b><span>学習・自主制作を重ね、現在は受託実績を構築しています。公開中の見本と、ご依頼の条件を照らし合わせて対応可否をお伝えします。</span></li>
+      <li><b>使用ツール</b><span>Git / Figma / Canva / 生成AI各種。AIを下書きや実装補助に使い、内容・表示・動作を確認して仕上げます。</span></li>
       <li><b>心がけていること</b><span>連絡は早く、修正は丁寧に。分からないことは分からないとお伝えします。</span></li>
     </ul>
   </div>
 </section>
 
-<section class="contact">
+<section class="skills faq"><div class="container"><p class="sec-label">FAQ</p><h2>相談前によくある疑問</h2><details><summary>どこを直せばよいか分からなくても相談できますか？</summary><p>対象URLと「予約前に料金を見てほしい」などの目的をお知らせください。まず対応可否と作業範囲を確認します。詳しい診断書や修正作業は、有料対応の範囲を決めてから行います。</p></details><details><summary>WordPressや予約フォームも依頼できますか？</summary><p>現在は静的なHTML / CSSのページを中心にお受けしています。CMS、フォーム、予約・決済の機能は、仕組みを確認してから対応可否をお伝えします。基本料金には含まれません。</p></details><details><summary>依頼すると問い合わせが増えますか？</summary><p>売上や問い合わせ数の増加は保証できません。文章の整理、リンクの修正、表示崩れの解消など、合意した変更と確認結果を納品します。</p></details></div></section>
+
+<section class="contact" id="contact">
   <div class="container">
     <p class="sec-label" style="color:#8fc7ea;">CONTACT</p>
-    <h2>お仕事のご相談</h2>
-    <p>ランサーズ・クラウドワークスを通じてご連絡ください。<br>ご要望をお聞かせいただければ、進め方とお見積りをご提案いたします。</p>
+    <h2>まずはURLと、困っていることを。</h2>
+    <p>専門用語や、完成した仕様書は不要です。<br>内容を確認して、対応範囲・費用・納期をご案内します。</p>
+    <p class="request">① 対象ページのURL（新規制作なら作りたい内容）<br>② 困っていること・実現したいこと<br>③ 希望時期と、ご予算があればその目安</p>
+    <div class="actions"><a class="button button-primary" href="https://www.instagram.com/syaru_re/">Instagramで相談する ↗</a><a class="button" href="https://coconala.com/users/6292769">ココナラで相談する ↗</a></div>
+    <p class="small">クラウドワークス・ランサーズ等からお越しの方は、その媒体内のメッセージでご連絡ください。相談時にパスワードを送る必要はありません。</p>
   </div>
 </section>
+</main>
 
 <footer>
-  © 2026 掃部託矢 — Portfolio
+  © 2026 KAMON DESIGN / 掃部託矢
 </footer>
 
 </body>
