@@ -5,247 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>株式会社シオミ技研｜海洋調査・環境データ解析</title>
 <meta name="description" content="沿岸域の環境調査から、取得データの整理・解析までを一貫して行う技術会社です。">
-<style>
-:root{
-  --navy:#0f2a3d;
-  --navy-2:#17405c;
-  --teal:#1a7f8e;
-  --teal-soft:#e6f2f3;
-  --ink:#20303a;
-  --ink-soft:#5d6f7a;
-  --line:#dde5e9;
-  --bg:#ffffff;
-  --wash:#f4f8f9;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;
-  color:var(--ink);background:var(--bg);
-  line-height:1.9;font-size:15px;letter-spacing:.02em;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block;}
-a{color:inherit;}
-.container{max-width:1080px;margin:0 auto;padding:0 24px;}
-
-.demo-note{
-  background:#fff8e6;color:#8a6d2f;font-size:12px;
-  padding:9px 24px;text-align:center;border-bottom:1px solid #f0e0b8;
-}
-
-/* header */
-header{
-  position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
-}
-.head-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  height:66px;
-}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo-mark{
-  width:32px;height:32px;border-radius:7px;flex:none;
-  background:linear-gradient(140deg,var(--teal),var(--navy));
-  position:relative;
-}
-.logo-mark::after{
-  content:"";position:absolute;left:7px;right:7px;top:14px;height:2px;
-  background:rgba(255,255,255,.85);border-radius:2px;
-  box-shadow:0 5px 0 rgba(255,255,255,.5);
-}
-.logo-text{font-size:16px;font-weight:700;letter-spacing:.04em;color:var(--navy);}
-.logo-text span{display:block;font-size:9.5px;font-weight:500;color:var(--ink-soft);letter-spacing:.14em;}
-nav ul{display:flex;gap:26px;list-style:none;}
-nav a{text-decoration:none;font-size:13.5px;font-weight:600;color:var(--ink);}
-nav a:hover{color:var(--teal);}
-.head-cta{
-  background:var(--navy);color:#fff;text-decoration:none;
-  font-size:13px;font-weight:700;padding:11px 20px;border-radius:5px;
-  letter-spacing:.04em;
-}
-.menu-btn{display:none;background:none;border:0;font-size:22px;color:var(--navy);cursor:pointer;}
-
-/* hero */
-.hero{
-  background:linear-gradient(150deg,var(--navy) 0%,var(--navy-2) 55%,#1d5570 100%);
-  color:#fff;position:relative;overflow:hidden;
-}
-.hero::before{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 60% 50% at 78% 30%, rgba(26,127,142,.5), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(255,255,255,.08), transparent 70%);
-}
-.hero-wave{
-  position:absolute;left:0;right:0;bottom:-2px;height:70px;
-  background:
-    radial-gradient(ellipse 55% 100% at 20% 100%, rgba(255,255,255,.07), transparent 70%),
-    radial-gradient(ellipse 45% 100% at 72% 100%, rgba(255,255,255,.05), transparent 70%);
-}
-.hero-inner{position:relative;z-index:2;padding:96px 0 104px;}
-.hero-label{
-  display:inline-block;font-size:11px;letter-spacing:.22em;font-weight:700;
-  color:#7fd4dd;border:1px solid rgba(127,212,221,.4);
-  padding:5px 14px;border-radius:100px;margin-bottom:26px;
-}
-.hero h1{
-  font-size:40px;line-height:1.55;font-weight:700;
-  letter-spacing:.01em;margin-bottom:22px;
-}
-.hero h1 span{color:#8fdae3;}
-.hero p{
-  font-size:15.5px;color:rgba(255,255,255,.82);max-width:560px;margin-bottom:34px;
-}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
-.btn{
-  display:inline-block;text-decoration:none;font-weight:700;font-size:14.5px;
-  padding:15px 32px;border-radius:5px;letter-spacing:.04em;
-}
-.btn-primary{background:#fff;color:var(--navy);}
-.btn-ghost{border:1px solid rgba(255,255,255,.45);color:#fff;}
-
-/* stats */
-.stats{
-  background:var(--wash);border-bottom:1px solid var(--line);
-}
-.stats-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-}
-.stat{padding:34px 20px;text-align:center;border-left:1px solid var(--line);}
-.stat:first-child{border-left:0;}
-.stat b{
-  display:block;font-size:34px;font-weight:700;color:var(--navy);
-  line-height:1.2;letter-spacing:-.01em;
-}
-.stat b small{font-size:16px;}
-.stat span{font-size:12.5px;color:var(--ink-soft);}
-
-/* section common */
-section{padding:88px 0;}
-.sec-label{
-  font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--teal);
-  margin-bottom:12px;
-}
-h2{font-size:29px;font-weight:700;line-height:1.5;margin-bottom:14px;letter-spacing:.01em;}
-.sec-lead{color:var(--ink-soft);font-size:14.5px;max-width:660px;margin-bottom:46px;}
-
-/* services */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-.svc{
-  border:1px solid var(--line);border-radius:10px;padding:30px 26px;
-  background:#fff;transition:box-shadow .2s,transform .2s;
-}
-.svc:hover{box-shadow:0 10px 30px rgba(15,42,61,.08);transform:translateY(-2px);}
-.svc-icon{
-  width:44px;height:44px;border-radius:9px;background:var(--teal-soft);
-  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
-}
-.svc-icon svg{width:22px;height:22px;stroke:var(--teal);fill:none;stroke-width:1.7;}
-.svc h3{font-size:17px;margin-bottom:10px;line-height:1.6;}
-.svc p{font-size:13.5px;color:var(--ink-soft);}
-
-/* strength */
-.strength{background:var(--wash);}
-.str-row{
-  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
-}
-.str-visual{
-  aspect-ratio:4/3;border-radius:12px;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,.5), transparent 45%),
-    linear-gradient(140deg,#2c6d85,#0f2a3d);
-  position:relative;overflow:hidden;
-}
-.str-visual::after{
-  content:"現地調査イメージ";position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,.4);font-size:12px;letter-spacing:.2em;
-}
-.str-list{list-style:none;}
-.str-list li{
-  padding:20px 0;border-bottom:1px solid var(--line);
-}
-.str-list li:first-child{padding-top:0;}
-.str-list h3{font-size:17px;margin-bottom:7px;display:flex;align-items:center;gap:10px;}
-.str-list h3::before{
-  content:"";width:6px;height:6px;border-radius:50%;background:var(--teal);flex:none;
-}
-.str-list p{font-size:13.5px;color:var(--ink-soft);}
-
-/* flow */
-.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-.flow-item{position:relative;padding-top:26px;}
-.flow-item::before{
-  content:"";position:absolute;top:9px;left:0;right:0;height:1px;background:var(--line);
-}
-.flow-item::after{
-  content:"";position:absolute;top:5px;left:0;width:9px;height:9px;
-  border-radius:50%;background:var(--teal);
-}
-.flow-step{font-size:11px;letter-spacing:.18em;color:var(--teal);font-weight:700;margin-bottom:8px;}
-.flow-item h3{font-size:16px;margin-bottom:8px;}
-.flow-item p{font-size:13px;color:var(--ink-soft);}
-
-/* company */
-.company{background:var(--wash);}
-.comp-table{width:100%;border-collapse:collapse;font-size:14px;}
-.comp-table th,.comp-table td{
-  padding:17px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;
-}
-.comp-table th{width:150px;color:var(--ink-soft);font-weight:700;}
-
-/* contact */
-.contact{
-  background:linear-gradient(150deg,var(--navy),var(--navy-2));color:#fff;text-align:center;
-}
-.contact h2{color:#fff;}
-.contact .sec-label{color:#7fd4dd;}
-.contact p{color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 32px;font-size:14.5px;}
-.contact-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-
-footer{
-  background:#0a1e2c;color:rgba(255,255,255,.55);
-  padding:36px 0;font-size:12.5px;
-}
-.foot-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
-.foot-links{display:flex;gap:20px;list-style:none;}
-.foot-links a{text-decoration:none;}
-.foot-links a:hover{color:#fff;}
-
-@media(max-width:860px){
-  .svc-grid{grid-template-columns:1fr;}
-  .str-row{grid-template-columns:1fr;gap:32px;}
-  .flow-grid{grid-template-columns:repeat(2,1fr);gap:28px 18px;}
-  .hero h1{font-size:29px;}
-  .hero-inner{padding:64px 0 72px;}
-  section{padding:62px 0;}
-  h2{font-size:24px;}
-  nav{display:none;}
-  .head-cta{display:none;}
-  .menu-btn{display:block;}
-  .stat b{font-size:27px;}
-  .comp-table th{width:96px;}
-}
-@media(max-width:480px){
-  .flow-grid{grid-template-columns:1fr;}
-  .stats-grid{grid-template-columns:1fr;}
-  .stat{border-left:0;border-top:1px solid var(--line);}
-  .stat:first-child{border-top:0;}
-}
-</style>
+<link rel="stylesheet" href="corporate.css">
 </head>
 <body>
 
-<p class="demo-note">※ ポートフォリオ用に制作した<strong>架空の企業</strong>のサンプルサイトです。実在の企業ではありません。</p>
+<p class="demo-note">※ ポートフォリオ用に制作した<strong>架空の企業</strong>のサンプルサイトです。実在の企業ではありません。 <a href="../#work-corporate">制作例一覧へ ↗</a></p>
 
-<header>
+<header id="top">
   <div class="container head-inner">
-    <a href="#" class="logo">
+    <a href="#top" class="logo">
       <span class="logo-mark"></span>
       <span class="logo-text">株式会社シオミ技研<span>SHIOMI MARINE TECH</span></span>
     </a>
-    <nav>
+    <nav id="site-nav" aria-label="サンプルサイトのメニュー">
       <ul>
         <li><a href="#service">事業内容</a></li>
         <li><a href="#strength">当社の強み</a></li>
@@ -254,30 +26,30 @@ footer{
       </ul>
     </nav>
     <a href="#contact" class="head-cta">お問い合わせ</a>
-    <button class="menu-btn" aria-label="メニュー">☰</button>
+    <button class="menu-btn" aria-label="メニューを開閉" aria-controls="site-nav" aria-expanded="false">☰</button>
   </div>
 </header>
 
 <!-- HERO -->
-<div class="hero">
+<main><div class="hero"><img class="ocean-image" src="assets/ocean-original.jpg" alt="深い青の海面に重なる波の実写写真" width="7360" height="4912" fetchpriority="high"><div class="hero-coordinate" aria-hidden="true"></div>
   <div class="container hero-inner">
     <span class="hero-label">MARINE ENVIRONMENT SURVEY</span>
-    <h1>海を、<span>データで</span>読み解く。</h1>
+    <h1>海を、読み解く。<br><span>データで、つなぐ。</span></h1>
     <p>沿岸域の環境調査から、取得したデータの整理・解析、報告書の作成までを一貫して担う技術会社です。現場に出る技術者が、そのままデータを扱います。</p>
     <div class="hero-actions">
       <a href="#contact" class="btn btn-primary">調査のご相談</a>
       <a href="#service" class="btn btn-ghost">事業内容を見る</a>
     </div>
   </div>
-  <div class="hero-wave"></div>
+  <div class="hero-caption">MARINE ENVIRONMENT × DATA ANALYSIS</div>
 </div>
 
 <!-- STATS -->
 <div class="stats">
   <div class="container stats-grid">
-    <div class="stat"><b>23<small>年</small></b><span>沿岸環境調査の実績</span></div>
-    <div class="stat"><b>480<small>件+</small></b><span>累計調査実施件数</span></div>
-    <div class="stat"><b>96<small>%</small></b><span>継続してご依頼いただく割合</span></div>
+    <div class="stat"><b>調査</b><span>現地の情報を集める</span></div>
+    <div class="stat"><b>解析</b><span>データを整理する</span></div>
+    <div class="stat"><b>報告</b><span>判断に使える資料へ</span></div>
   </div>
 </div>
 
@@ -322,7 +94,7 @@ footer{
     <p class="sec-lead">規模の大きさではなく、一件ごとの精度でお応えしています。</p>
 
     <div class="str-row">
-      <div class="str-visual"></div>
+      <div class="str-visual" role="img" aria-label="現地調査、データ解析、報告書作成を一貫して行う工程図"><p class="diagram-title">ONE CONTINUOUS PROCESS</p><ol class="diagram-stages"><li><span>01</span><b>現地調査</b><small>SURVEY</small></li><li><span>02</span><b>データ解析</b><small>ANALYSIS</small></li><li><span>03</span><b>報告・提案</b><small>REPORT</small></li></ol><p class="diagram-note">現場で得た知見を、意思決定の資料へ。</p></div>
       <ul class="str-list">
         <li>
           <h3>現場に出た技術者が解析まで行います</h3>
@@ -399,13 +171,14 @@ footer{
     <h2>調査のご相談を承ります</h2>
     <p>「どこまで調べるべきか分からない」という段階でも構いません。目的をお聞かせいただければ、必要な調査項目からご提案いたします。</p>
     <div class="contact-actions">
-      <a href="#" class="btn btn-primary">お問い合わせフォーム</a>
-      <a href="#" class="btn btn-ghost">000-000-0000</a>
+      <button type="button" class="btn btn-primary" id="demo-contact">問い合わせ導線を試す</button>
+      <a href="../#work-corporate" class="btn btn-ghost">制作例の説明へ戻る</a>
     </div>
+    <p class="demo-feedback" id="demo-feedback" role="status" tabindex="-1">表示確認用のデモです。お問い合わせは送信されません。</p>
   </div>
 </section>
 
-<footer>
+</main><footer>
   <div class="container foot-inner">
     <span>© 2026 株式会社シオミ技研（架空のサンプル）</span>
     <ul class="foot-links">
@@ -414,7 +187,8 @@ footer{
       <li><a href="#contact">お問い合わせ</a></li>
     </ul>
   </div>
-</footer>
+<div class="container photo-credit">Photo: <a href="https://www.pexels.com/photo/aerial-shot-of-a-blue-ocean-15305602/">Diego F. Parra / Pexels</a>（イメージ写真・調査実績の写真ではありません）</div></footer>
 
+<script>const toggle=document.querySelector('.menu-btn');const menu=document.getElementById('site-nav');toggle.addEventListener('click',()=>{const expanded=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(expanded));menu.classList.toggle('is-open',expanded);});menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{toggle.setAttribute('aria-expanded','false');menu.classList.remove('is-open');}));document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){toggle.setAttribute('aria-expanded','false');menu.classList.remove('is-open');toggle.focus();}});document.getElementById('demo-contact').addEventListener('click',()=>{const note=document.getElementById('demo-feedback');note.textContent='デモの操作を確認しました。実案件では合意した相談窓口へ接続します。お問い合わせは送信されていません。';note.focus();});</script>
 </body>
 </html>

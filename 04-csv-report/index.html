@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>売上CSV 自動集計レポート｜制作サンプル</title>
-<meta name="description" content="毎月手作業で集計していた売上CSVを、ドラッグ&ドロップだけでレポート化するツールの制作サンプルです。">
+<meta name="description" content="売上CSVの集計とグラフ表示をブラウザ内で試せる自主制作デモ。架空のサンプルデータで操作を確認できます。">
 <style>
 :root{
   color-scheme: light;
@@ -189,21 +189,21 @@ footer a{color:var(--series-1);}
   .panel{padding:20px 17px;}
 }
 </style>
-</head>
+<style>.portfolio-back{display:inline-block;margin:12px 0 10px;font:700 11px Arial,sans-serif;color:var(--text-secondary);text-decoration:none}.wrap>header{padding:32px 0}h1{font-size:clamp(28px,4vw,42px);letter-spacing:-.03em;line-height:1.5}.panel{border-radius:6px;box-shadow:none}.drop{border-radius:4px}.eyebrow{letter-spacing:.13em}.meta-tags span{border-radius:3px}.drop-icon{font-size:32px}button:focus-visible,a:focus-visible,.drop:focus-visible{outline:3px solid #b57027;outline-offset:4px}@media(max-width:560px){h1{font-size:27px}.btn-row{align-items:stretch}.btn-row button{flex:1 1 170px}.chart-box{overflow:hidden}}</style></head>
 <body>
 
 <div class="demo-note">
   これは制作サンプルです。表示しているデータは架空の店舗を想定して自動生成したもので、実在の企業・売上ではありません。
 </div>
 
-<div class="wrap">
+<div class="wrap"><a class="portfolio-back" href="../#works">← KAMON DESIGN / 制作例に戻る</a>
 
 <header>
   <p class="eyebrow">AUTOMATION / 制作サンプル</p>
-  <h1>毎月2時間の売上集計を、<br>ドラッグ&ドロップの数秒に</h1>
+  <h1>売上データを、<br>ひと目で読めるレポートへ。</h1>
   <p class="lede">
     「月末に各店舗から送られてくるCSVを開いて、ピボットを組んで、グラフを貼って、報告書にまとめる」——
-    その一連の作業を、ファイルを置くだけで終わらせるツールです。実際に動きます。下のエリアにCSVを入れてお試しください。
+    その集計と可視化をブラウザ内で試せる、自主制作のデモです。まずはサンプルデータで、グラフと集計結果をご覧ください。
   </p>
   <div class="meta-tags">
     <span>JavaScript</span><span>CSV解析</span><span>自動集計</span><span>SVGグラフ生成</span><span>ブラウザ完結</span>
