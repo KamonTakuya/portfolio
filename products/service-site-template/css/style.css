@@ -1,0 +1,122 @@
+/* ==========================================================
+   1ページ サービスサイト テンプレート
+   ----------------------------------------------------------
+   色・文字・余白は、すぐ下の「:root」でまとめて変更できます。
+   まずはここだけ編集すれば、サイト全体の雰囲気が変わります。
+   ========================================================== */
+
+/* ----- 1. 設定（ここを編集） ----- */
+:root {
+  /* 色 */
+  --color-main: #2f6f5e;        /* メインカラー：ボタン・見出しの飾りなど */
+  --color-main-dark: #24584a;   /* メインカラーの濃い色：ボタンにカーソルを乗せた時 */
+  --color-accent: #e8a33d;      /* アクセントカラー：強調したい小さな部分 */
+  --color-text: #2b2b2b;        /* 本文の文字色 */
+  --color-text-sub: #666666;    /* 補足文の文字色 */
+  --color-bg: #ffffff;          /* 基本の背景色 */
+  --color-bg-sub: #f5f4f0;      /* セクションを交互に塗り分ける背景色 */
+  --color-border: #dddddd;      /* 線の色 */
+
+  /* 文字 */
+  --font-base: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+
+  /* レイアウト */
+  --container-width: 1080px;    /* コンテンツの最大幅 */
+  --section-space: 64px;        /* セクション上下の余白（スマホ） */
+  --radius: 8px;                /* 角丸の大きさ */
+}
+
+/* ----- 2. 基本設定（通常は編集不要） ----- */
+
+/* 幅の計算に padding と border を含める（レイアウト崩れを防ぐ） */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* ページ内リンクをなめらかにスクロール */
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  /* 長い英単語・URLで横にはみ出さないようにする */
+  overflow-wrap: anywhere;
+}
+
+/* 画像が親要素より大きくならないようにする */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 16px;
+  line-height: 1.4;
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+a {
+  color: var(--color-main);
+}
+
+/* ----- 3. 共通レイアウト ----- */
+
+/* 中身の幅をそろえ、左右に余白をつける箱 */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 各セクションの上下余白 */
+.section {
+  padding: var(--section-space) 0;
+}
+
+/* 偶数番目のセクションだけ背景色を変えて、区切りを分かりやすくする */
+.section:nth-of-type(even) {
+  background-color: var(--color-bg-sub);
+}
+
+/* ----- 4. ヘッダー ----- */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  padding: 16px 0;
+}
+
+.site-logo {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* ----- 5. フッター ----- */
+.site-footer {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--color-text-sub);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ----- 6. パソコン向けの調整（画面幅768px以上） ----- */
+/* スマホ用を先に書き、広い画面だけ上書きする「モバイルファースト」 */
+@media (min-width: 768px) {
+  :root {
+    --section-space: 96px;
+  }
+}
