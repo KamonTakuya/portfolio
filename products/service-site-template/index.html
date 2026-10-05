@@ -40,9 +40,39 @@
   <main>
 
     <!-- ===== 1. メインビジュアル（サービス紹介） ===== -->
-    <section class="section" id="hero">
-      <div class="container">
-        <h1>キャッチコピーが入ります</h1>
+    <section class="section hero" id="hero">
+      <div class="container hero-inner">
+
+        <!-- 左側（スマホでは上）：文章とボタン -->
+        <div class="hero-text">
+          <!-- 【編集】誰向けの、何のサービスかを短く -->
+          <p class="hero-label">〇〇市の個人・小規模事業者さま向け △△サービス</p>
+
+          <!-- 【編集】キャッチコピー（1行10文字前後 × 2行がおすすめ） -->
+          <!-- <br> は改行です。スマホでは1行に約12文字入ります。長いと途中で自動的に折り返されます -->
+          <h1 class="hero-title">あなたの〇〇を、<br>もっと身近に。</h1>
+
+          <!-- 【編集】説明文（2〜3文が目安） -->
+          <p class="hero-lead">ここにサービスの説明文が入ります。どんな悩みを持つ人に、何を提供して、どう変わるのかを2〜3文で書きます。</p>
+
+          <div class="hero-buttons">
+            <!-- 【編集】ボタンの文字 -->
+            <a href="#contact" class="button">お問い合わせはこちら</a>
+            <a href="#pricing" class="button button-outline">料金を見る</a>
+          </div>
+
+          <!-- 【編集】補足（不要なら この p の行ごと削除） -->
+          <p class="hero-note">初回のご相談は無料です</p>
+        </div>
+
+        <!-- 右側（スマホでは下）：画像 -->
+        <!-- 【編集】src に画像ファイル名を書きます -->
+        <!-- alt は画像の説明文です。写真が内容を伝える場合は「打ち合わせをする様子」のように書き、飾りの画像なら空（alt=""）のままにします -->
+        <!-- 違うサイズの画像でも、横4:縦3に切り抜いて表示されます -->
+        <div class="hero-image">
+          <img src="images/hero.svg" alt="" width="1200" height="900">
+        </div>
+
       </div>
     </section>
 

@@ -121,6 +121,21 @@ a {
   font-size: 14px;
 }
 
+/* 枠線だけのボタン（2番目に目立たせたいボタン用） */
+.button-outline {
+  background-color: transparent;
+  color: var(--color-main);
+  /* 枠線の分だけ内側の余白を減らし、普通のボタンと同じ大きさにそろえる */
+  padding: 10px 26px;
+  border: 2px solid var(--color-main);
+}
+
+.button-outline:hover,
+.button-outline:focus-visible {
+  background-color: var(--color-main);
+  color: #ffffff;
+}
+
 /* ----- 5. ヘッダー ----- */
 .site-header {
   /* スクロールしても画面の上に固定する */
@@ -176,7 +191,58 @@ a {
   text-decoration: underline;
 }
 
-/* ----- 6. フッター ----- */
+/* ----- 6. メインビジュアル ----- */
+
+/* スマホ：文章 → 画像 の順に縦に並べる */
+.hero-inner {
+  display: grid;
+  gap: 40px;
+}
+
+.hero-label {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-main);
+}
+
+.hero-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.hero-lead {
+  color: var(--color-text-sub);
+  margin-bottom: 28px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;   /* 入りきらない時は折り返す */
+  gap: 12px;
+}
+
+/* スマホ：ボタンを横幅いっぱいに広げて、押しやすく・幅をそろえる */
+.hero-buttons .button {
+  flex: 1 1 auto;
+}
+
+.hero-note {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--color-text-sub);
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  /* どんなサイズの画像でも 横4:縦3 の枠に収め、はみ出た部分は切り抜く */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+/* ----- 7. フッター ----- */
 .site-footer {
   padding: 24px 0;
   text-align: center;
@@ -184,7 +250,7 @@ a {
   border-top: 1px solid var(--color-border);
 }
 
-/* ----- 7. パソコン向けの調整（画面幅768px以上） ----- */
+/* ----- 8. パソコン向けの調整（画面幅768px以上） ----- */
 /* スマホ用を先に書き、広い画面だけ上書きする「モバイルファースト」 */
 @media (min-width: 768px) {
   :root {
@@ -208,5 +274,29 @@ a {
   .header-nav ul {
     gap: 28px;
     padding: 0;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  /* タブレット以上：ボタンを文字の長さに合わせた幅に戻す */
+  .hero-buttons .button {
+    flex: 0 0 auto;
+  }
+}
+
+/* ----- 9. 広い画面向けの調整（画面幅960px以上） ----- */
+/* 2列に並べると窮屈になるタブレット幅では縦並びのままにし、ここで初めて2列にする */
+@media (min-width: 960px) {
+  /* メインビジュアル：左に文章、右に画像の2列 */
+  .hero-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;   /* 文章と画像の上下中央をそろえる */
+    gap: 48px;
+  }
+
+  .hero-title {
+    font-size: 40px;
   }
 }

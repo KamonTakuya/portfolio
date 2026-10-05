@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-label="差し替え用のダミー画像">
+  <!-- テンプレート用のダミー画像です。images/hero.jpg などに差し替えてください（推奨 1200×900px / 横4:縦3） -->
+  <rect width="1200" height="900" fill="#e7eeea"/>
+  <circle cx="930" cy="230" r="150" fill="#f3d9a8"/>
+  <path d="M0 640 C220 540 420 560 620 620 S1000 700 1200 600 V900 H0 Z" fill="#c9dbd2"/>
+  <path d="M0 740 C260 660 520 690 760 740 S1060 790 1200 730 V900 H0 Z" fill="#a9c7b8"/>
+  <rect x="330" y="330" width="540" height="190" rx="16" fill="#ffffff" fill-opacity="0.85"/>
+  <text x="600" y="412" text-anchor="middle" font-family="sans-serif" font-size="40" font-weight="bold" fill="#2f6f5e">ここに画像が入ります</text>
+  <text x="600" y="472" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#555555">推奨サイズ 1200 × 900px（4:3）</text>
+</svg>
