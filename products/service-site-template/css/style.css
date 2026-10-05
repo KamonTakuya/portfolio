@@ -24,6 +24,7 @@
   --container-width: 1080px;    /* コンテンツの最大幅 */
   --section-space: 64px;        /* セクション上下の余白（スマホ） */
   --radius: 8px;                /* 角丸の大きさ */
+  --header-height: 112px;       /* 固定ヘッダーの高さ（スマホ）。ページ内リンクの位置合わせに使用 */
 }
 
 /* ----- 2. 基本設定（通常は編集不要） ----- */
@@ -38,6 +39,8 @@
 html {
   /* ページ内リンクをなめらかにスクロール */
   scroll-behavior: smooth;
+  /* 固定ヘッダーの下に見出しが隠れないよう、ジャンプ先をヘッダーの高さ分ずらす */
+  scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -92,10 +95,50 @@ a {
   background-color: var(--color-bg-sub);
 }
 
-/* ----- 4. ヘッダー ----- */
+/* ----- 4. ボタン（ページ内のどこでも使える共通部品） ----- */
+.button {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+/* カーソルを乗せた時、キーボードで選んだ時は濃い色に */
+.button:hover,
+.button:focus-visible {
+  background-color: var(--color-main-dark);
+}
+
+/* 小さいボタン（ヘッダー用） */
+.button-small {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* ----- 5. ヘッダー ----- */
 .site-header {
+  /* スクロールしても画面の上に固定する */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
-  padding: 16px 0;
+}
+
+/* スマホ：1段目に「屋号」と「ボタン」、2段目に「メニュー」 */
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 16px;
+  padding-top: 12px;
 }
 
 .site-logo {
@@ -105,7 +148,35 @@ a {
   text-decoration: none;
 }
 
-/* ----- 5. フッター ----- */
+.header-nav {
+  order: 3;             /* HTMLの順番に関係なく、一番最後（2段目）に表示 */
+  width: 100%;
+  overflow-x: auto;     /* メニューが増えて入りきらない時は横にスクロール */
+}
+
+.header-nav ul {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;     /* 箇条書きの「・」を消す */
+  white-space: nowrap;  /* メニュー名の途中で改行しない */
+}
+
+.header-nav a {
+  display: block;
+  padding: 4px 0;
+  font-size: 14px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.header-nav a:hover {
+  color: var(--color-main);
+  text-decoration: underline;
+}
+
+/* ----- 6. フッター ----- */
 .site-footer {
   padding: 24px 0;
   text-align: center;
@@ -113,10 +184,29 @@ a {
   border-top: 1px solid var(--color-border);
 }
 
-/* ----- 6. パソコン向けの調整（画面幅768px以上） ----- */
+/* ----- 7. パソコン向けの調整（画面幅768px以上） ----- */
 /* スマホ用を先に書き、広い画面だけ上書きする「モバイルファースト」 */
 @media (min-width: 768px) {
   :root {
     --section-space: 96px;
+    --header-height: 80px;
+  }
+
+  /* ヘッダーを1段にまとめる：屋号 ／ メニュー ／ ボタン */
+  .header-inner {
+    flex-wrap: nowrap;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .header-nav {
+    order: 0;           /* HTMLどおりの順番に戻す */
+    width: auto;
+    margin-left: auto;  /* メニューを右側に寄せる */
+  }
+
+  .header-nav ul {
+    gap: 28px;
+    padding: 0;
   }
 }
