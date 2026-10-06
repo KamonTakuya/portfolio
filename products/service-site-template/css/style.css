@@ -408,7 +408,84 @@ a {
   color: var(--color-text-sub);
 }
 
-/* ----- 9. フッター ----- */
+/* ----- 9. ご利用の流れ ----- */
+.flow-list {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  /* 番号を数えるカウンター「flow」を用意する（0から始まる） */
+  counter-reset: flow;
+}
+
+.flow-item {
+  position: relative;      /* 番号の丸と線の位置の基準にする */
+  padding: 0 0 24px 64px;  /* 左に丸を置く場所（64px）、下にステップ間の余白（24px） */
+  /* ステップが1つ来るたびに、カウンターを1増やす */
+  counter-increment: flow;
+}
+
+/* 番号の丸：中身はカウンターの数字（自動で 1, 2, 3…） */
+.flow-item::before {
+  content: counter(flow);
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;     /* 正方形を正円にする */
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  /* 数字を丸の中央に置く */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ステップをつなぐ縦線：丸の下から、次の丸の手前まで */
+.flow-item::after {
+  content: "";
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 21px;             /* 丸の中央（44px ÷ 2 − 線の太さ 2px ÷ 2） */
+  width: 2px;
+  background-color: var(--color-main);
+}
+
+/* 最後のステップは線と下の余白をなくす */
+.flow-item:last-child {
+  padding-bottom: 0;
+}
+
+.flow-item:last-child::after {
+  display: none;
+}
+
+.flow-body {
+  padding: 20px 24px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+}
+
+.flow-title {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.flow-body p:last-child {
+  margin-bottom: 0;
+}
+
+.flow-time {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-main);
+}
+
+/* ----- 10. フッター ----- */
 .site-footer {
   padding: 24px 0;
   text-align: center;
@@ -416,7 +493,7 @@ a {
   border-top: 1px solid var(--color-border);
 }
 
-/* ----- 10. パソコン向けの調整（画面幅768px以上） ----- */
+/* ----- 11. パソコン向けの調整（画面幅768px以上） ----- */
 /* スマホ用を先に書き、広い画面だけ上書きする「モバイルファースト」 */
 @media (min-width: 768px) {
   :root {
@@ -460,7 +537,7 @@ a {
   }
 }
 
-/* ----- 11. 広い画面向けの調整（画面幅960px以上） ----- */
+/* ----- 12. 広い画面向けの調整（画面幅960px以上） ----- */
 /* 2列に並べると窮屈になるタブレット幅では縦並びのままにし、ここで初めて2列にする */
 @media (min-width: 960px) {
   /* メインビジュアル：左に文章、右に画像の2列 */
