@@ -303,7 +303,112 @@ a {
   margin-bottom: 0;
 }
 
-/* ----- 8. フッター ----- */
+/* ----- 8. 料金 ----- */
+.plan-list {
+  display: grid;
+  /* 画面幅960px未満：プランを比べやすいよう1列に並べ、広がりすぎないよう幅を制限 */
+  grid-template-columns: 1fr;
+  max-width: 480px;
+  gap: 32px 24px;   /* 縦の間隔 32px（おすすめラベルの分を空ける）、横の間隔 24px */
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.plan-card {
+  /* 中身を縦に並べ、ボタンをカードの一番下にそろえる */
+  display: flex;
+  flex-direction: column;
+  position: relative;   /* 「おすすめ」ラベルの位置の基準にする */
+  padding: 36px 24px 28px;
+  background-color: var(--color-bg);
+  /* 枠線はすべて2pxにそろえる（太さが違うと中身が1pxずれるため） */
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+/* おすすめプランは枠線をメインカラーに */
+.plan-card.is-recommended {
+  border-color: var(--color-main);
+}
+
+/* 「おすすめ」ラベル：カードの上の線に重ねて表示 */
+.plan-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);   /* 自分の大きさの半分だけ左・上にずらして中央にそろえる */
+  margin: 0;
+  padding: 2px 16px;
+  border-radius: 999px;               /* 大きな値にすると両端が丸くなる */
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.plan-name {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.plan-desc {
+  font-size: 14px;
+  color: var(--color-text-sub);
+}
+
+.plan-price {
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1.3;
+  color: var(--color-main);
+}
+
+.plan-price-unit {
+  margin-left: 4px;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.plan-features {
+  /* 内容の行数がプランごとに違っても、ここが伸びてボタンの高さがそろう */
+  flex-grow: 1;
+  margin: 0 0 24px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--color-border);
+  list-style: none;
+  text-align: left;
+}
+
+.plan-features li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+
+/* チェックマーク：L字の線を45度回転させて描く（画像や記号フォントを使わない） */
+.plan-features li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.45em;
+  width: 6px;
+  height: 11px;
+  border-right: 2px solid var(--color-main);
+  border-bottom: 2px solid var(--color-main);
+  transform: rotate(45deg);
+}
+
+.pricing-note {
+  margin: 32px 0 0;
+  font-size: 14px;
+  color: var(--color-text-sub);
+}
+
+/* ----- 9. フッター ----- */
 .site-footer {
   padding: 24px 0;
   text-align: center;
@@ -311,7 +416,7 @@ a {
   border-top: 1px solid var(--color-border);
 }
 
-/* ----- 9. パソコン向けの調整（画面幅768px以上） ----- */
+/* ----- 10. パソコン向けの調整（画面幅768px以上） ----- */
 /* スマホ用を先に書き、広い画面だけ上書きする「モバイルファースト」 */
 @media (min-width: 768px) {
   :root {
@@ -355,7 +460,7 @@ a {
   }
 }
 
-/* ----- 10. 広い画面向けの調整（画面幅960px以上） ----- */
+/* ----- 11. 広い画面向けの調整（画面幅960px以上） ----- */
 /* 2列に並べると窮屈になるタブレット幅では縦並びのままにし、ここで初めて2列にする */
 @media (min-width: 960px) {
   /* メインビジュアル：左に文章、右に画像の2列 */
@@ -367,5 +472,11 @@ a {
 
   .hero-title {
     font-size: 40px;
+  }
+
+  /* 料金：横に並べる。「特徴」カードと同じしくみで、プランを増減しても自動で並ぶ */
+  .plan-list {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    max-width: none;
   }
 }

@@ -115,7 +115,65 @@
     <!-- ===== 3. 料金 ===== -->
     <section class="section" id="pricing">
       <div class="container">
-        <h2>料金</h2>
+
+        <div class="section-head">
+          <!-- 【編集】小さな英字ラベル・見出し・導入文 -->
+          <p class="section-label">PRICE</p>
+          <h2 class="section-title">料金プラン</h2>
+          <p class="section-lead">ご希望に合わせて選べる3つのプランをご用意しています。</p>
+        </div>
+
+        <!-- 料金プラン：<li> 〜 </li> が1プラン分です（増減の方法は「特徴」カードと同じ） -->
+        <ul class="plan-list">
+
+          <li class="plan-card">
+            <!-- 【編集】プラン名・説明・料金 -->
+            <h3 class="plan-name">ライトプラン</h3>
+            <p class="plan-desc">まずは試してみたい方に</p>
+            <!-- 一般のお客様向けの料金は、税込価格（総額）で表示するのが基本です -->
+            <p class="plan-price">10,000<span class="plan-price-unit">円（税込）</span></p>
+            <!-- 【編集】プランに含まれる内容（<li> 1行が1項目） -->
+            <ul class="plan-features">
+              <li>内容1が入ります</li>
+              <li>内容2が入ります</li>
+              <li>内容3が入ります</li>
+            </ul>
+            <a href="#contact" class="button button-outline">このプランで相談する</a>
+          </li>
+
+          <!-- おすすめのプラン：class に is-recommended を付けると強調表示になります -->
+          <!-- 別のプランを強調したい時は、is-recommended と「おすすめ」の行をそのプランへ移動します -->
+          <li class="plan-card is-recommended">
+            <p class="plan-badge">おすすめ</p>
+            <h3 class="plan-name">スタンダードプラン</h3>
+            <p class="plan-desc">いちばん多く選ばれているプラン</p>
+            <p class="plan-price">30,000<span class="plan-price-unit">円（税込）</span></p>
+            <ul class="plan-features">
+              <li>ライトプランの内容すべて</li>
+              <li>内容4が入ります</li>
+              <li>内容5が入ります</li>
+              <li>内容6が入ります</li>
+            </ul>
+            <a href="#contact" class="button">このプランで相談する</a>
+          </li>
+
+          <li class="plan-card">
+            <h3 class="plan-name">プレミアムプラン</h3>
+            <p class="plan-desc">しっかりサポートを受けたい方に</p>
+            <p class="plan-price">50,000<span class="plan-price-unit">円（税込）〜</span></p>
+            <ul class="plan-features">
+              <li>スタンダードプランの内容すべて</li>
+              <li>内容7が入ります</li>
+              <li>内容8が入ります</li>
+            </ul>
+            <a href="#contact" class="button button-outline">このプランで相談する</a>
+          </li>
+
+        </ul>
+
+        <!-- 【編集】料金の補足（料金に含まれないもの、追加費用、支払い方法など） -->
+        <p class="pricing-note">※ 表示価格はすべて税込です。料金に含まれない費用（交通費など）がある場合は、事前にお見積もりします。</p>
+
       </div>
     </section>
 
