@@ -76,6 +76,26 @@ a {
   color: var(--color-main);
 }
 
+/* キーボードで選んだ場所を、太い枠線ではっきり示す（マウスでクリックした時は出ない） */
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-main);
+  outline-offset: 3px;
+}
+
+/* 「動きを減らす」設定のパソコン・スマホでは、スクロールやアニメーションの動きを止める */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
 /* ----- 3. 共通レイアウト ----- */
 
 /* 中身の幅をそろえ、左右に余白をつける箱 */
@@ -117,6 +137,23 @@ a {
 .section-lead {
   margin-bottom: 0;
   color: var(--color-text-sub);
+}
+
+/* 「本文へ移動」リンク：ふだんは画面の外に隠し、Tabキーで選ばれた時だけ左上に表示 */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 16px;
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  top: 16px;
 }
 
 /* 画面には表示せず、読み上げソフトにだけ伝える文字 */
@@ -282,9 +319,8 @@ a {
 /* ----- 7. 特徴 ----- */
 .feature-list {
   display: grid;
-  /* カード1枚の最小幅を220pxとして、画面に入るだけ横に並べる。
-     カードを増やしたり減らしたりしても、CSSを変えずに自動で並び替わる */
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  /* スマホ・小さいタブレット：1列 */
+  grid-template-columns: 1fr;
   gap: 24px;
   margin: 0;
   padding: 0;
@@ -703,6 +739,12 @@ a {
 
   .section-head {
     margin-bottom: 56px;
+  }
+
+  /* 特徴カード：1枚の最小幅を220pxとして、画面に入るだけ横に並べる。
+     カードを増やしたり減らしたりしても、CSSを変えずに自動で並び替わる */
+  .feature-list {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   /* タブレット以上：ボタンを文字の長さに合わせた幅に戻す */

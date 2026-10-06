@@ -1,5 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
+<!--
+  ページ内の <ul> と <ol> に付いている role="list" について：
+  CSSで「・」や番号を消したリストは、Safariの読み上げで「リスト」と伝わらないことがあるため、
+  あえて付けています（HTMLチェックツールで「不要」と表示されることがありますが、削除しないでください）
+-->
 <head>
   <meta charset="utf-8">
   <!-- スマートフォンで画面幅に合わせて表示するための指定（削除しないでください） -->
@@ -15,6 +20,9 @@
 <!-- id="top"：「ページの先頭へ戻る」リンクの行き先 -->
 <body id="top">
 
+  <!-- キーボードで操作する人が、メニューを飛ばして本文へ移動するためのリンク（Tabキーを押した時だけ表示） -->
+  <a href="#main" class="skip-link">本文へ移動</a>
+
   <!-- ===== ヘッダー ===== -->
   <header class="site-header">
     <div class="container header-inner">
@@ -24,7 +32,7 @@
       <!-- ページ内メニュー：href="#○○" は、下の各セクションの id="○○" へ移動します -->
       <!-- 【編集】メニュー名（不要なセクションを削除した時は、ここの行も削除） -->
       <nav class="header-nav" aria-label="ページ内メニュー">
-        <ul>
+        <ul role="list">
           <li><a href="#features">特徴</a></li>
           <li><a href="#pricing">料金</a></li>
           <li><a href="#flow">ご利用の流れ</a></li>
@@ -37,7 +45,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
 
     <!-- ===== 1. メインビジュアル（サービス紹介） ===== -->
     <section class="section hero" id="hero">
@@ -90,7 +98,7 @@
 
         <!-- 特徴カード：<li> 〜 </li> が1枚分です -->
         <!-- 増やす時は1枚分をコピーして貼り付け、減らす時は1枚分を削除します（並びは自動で調整されます） -->
-        <ul class="feature-list">
+        <ul class="feature-list" role="list">
           <li class="feature-card">
             <!-- 【編集】ラベル・見出し・説明文 -->
             <p class="feature-number">POINT 01</p>
@@ -124,7 +132,7 @@
         </div>
 
         <!-- 料金プラン：<li> 〜 </li> が1プラン分です（増減の方法は「特徴」カードと同じ） -->
-        <ul class="plan-list">
+        <ul class="plan-list" role="list">
 
           <li class="plan-card">
             <!-- 【編集】プラン名・説明・料金 -->
@@ -133,7 +141,7 @@
             <!-- 一般のお客様向けの料金は、税込価格（総額）で表示するのが基本です -->
             <p class="plan-price">10,000<span class="plan-price-unit">円（税込）</span></p>
             <!-- 【編集】プランに含まれる内容（<li> 1行が1項目） -->
-            <ul class="plan-features">
+            <ul class="plan-features" role="list">
               <li>内容1が入ります</li>
               <li>内容2が入ります</li>
               <li>内容3が入ります</li>
@@ -148,7 +156,7 @@
             <h3 class="plan-name">スタンダードプラン</h3>
             <p class="plan-desc">いちばん多く選ばれているプラン</p>
             <p class="plan-price">30,000<span class="plan-price-unit">円（税込）</span></p>
-            <ul class="plan-features">
+            <ul class="plan-features" role="list">
               <li>ライトプランの内容すべて</li>
               <li>内容4が入ります</li>
               <li>内容5が入ります</li>
@@ -161,7 +169,7 @@
             <h3 class="plan-name">プレミアムプラン</h3>
             <p class="plan-desc">しっかりサポートを受けたい方に</p>
             <p class="plan-price">50,000<span class="plan-price-unit">円（税込）〜</span></p>
-            <ul class="plan-features">
+            <ul class="plan-features" role="list">
               <li>スタンダードプランの内容すべて</li>
               <li>内容7が入ります</li>
               <li>内容8が入ります</li>
@@ -191,7 +199,7 @@
 
         <!-- ステップ：<li> 〜 </li> が1ステップ分です -->
         <!-- 番号（1, 2, 3…）は自動で付きます。ステップを増やしたり減らしたりしても、番号を書き直す必要はありません -->
-        <ol class="flow-list">
+        <ol class="flow-list" role="list">
 
           <li class="flow-item">
             <div class="flow-body">
