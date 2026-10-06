@@ -485,7 +485,93 @@ a {
   color: var(--color-main);
 }
 
-/* ----- 10. フッター ----- */
+/* ----- 10. よくある質問 ----- */
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+}
+
+/* 質問（クリックで開閉する部分） */
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 48px 16px 16px;   /* 右側は開閉アイコンの場所 */
+  position: relative;              /* 開閉アイコンの位置の基準にする */
+  font-weight: bold;
+  cursor: pointer;                 /* カーソルを指の形にして、押せることを伝える */
+  list-style: none;                /* ブラウザ標準の三角マークを消す */
+}
+
+/* Safari の標準の三角マークを消す */
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+/* 開閉アイコン：L字の線を回転させた矢印。閉じている時は下向き */
+.faq-question::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-top: -7px;
+  border-right: 2px solid var(--color-main);
+  border-bottom: 2px solid var(--color-main);
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+
+/* 開いている時（details に open が付いた時）は上向きにする */
+.faq-item[open] .faq-question::after {
+  margin-top: -2px;
+  transform: rotate(-135deg);
+}
+
+/* 「Q」「A」の丸 */
+.faq-mark {
+  flex-shrink: 0;   /* 質問が長くても丸がつぶれないようにする */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.faq-mark-answer {
+  background-color: var(--color-bg-sub);
+  color: var(--color-main);
+}
+
+/* 回答 */
+.faq-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 16px;
+  padding: 16px 0;
+  border-top: 1px dashed var(--color-border);
+}
+
+.faq-answer p {
+  margin: 0;
+  padding-top: 2px;   /* 「A」の丸と1行目の文字の高さをそろえる */
+}
+
+/* ----- 11. フッター ----- */
 .site-footer {
   padding: 24px 0;
   text-align: center;
@@ -493,7 +579,7 @@ a {
   border-top: 1px solid var(--color-border);
 }
 
-/* ----- 11. パソコン向けの調整（画面幅768px以上） ----- */
+/* ----- 12. パソコン向けの調整（画面幅768px以上） ----- */
 /* スマホ用を先に書き、広い画面だけ上書きする「モバイルファースト」 */
 @media (min-width: 768px) {
   :root {
@@ -537,7 +623,7 @@ a {
   }
 }
 
-/* ----- 12. 広い画面向けの調整（画面幅960px以上） ----- */
+/* ----- 13. 広い画面向けの調整（画面幅960px以上） ----- */
 /* 2列に並べると窮屈になるタブレット幅では縦並びのままにし、ここで初めて2列にする */
 @media (min-width: 960px) {
   /* メインビジュアル：左に文章、右に画像の2列 */

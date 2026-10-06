@@ -232,7 +232,67 @@
     <!-- ===== 5. よくある質問 ===== -->
     <section class="section" id="faq">
       <div class="container">
-        <h2>よくある質問</h2>
+
+        <div class="section-head">
+          <!-- 【編集】小さな英字ラベル・見出し・導入文 -->
+          <p class="section-label">FAQ</p>
+          <h2 class="section-title">よくある質問</h2>
+          <p class="section-lead">お問い合わせの前に、よくいただくご質問をまとめました。</p>
+        </div>
+
+        <!-- 質問：<details> 〜 </details> が1問分です -->
+        <!-- <summary> の中が質問（クリックで開閉）、その下が回答です。JavaScriptは使っていません -->
+        <!-- 最初から開いておきたい質問は、<details class="faq-item" open> のように open を付けます -->
+        <div class="faq-list">
+
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              <span class="faq-mark" aria-hidden="true">Q</span>
+              <!-- 【編集】質問 -->
+              <span>初めてでも利用できますか？</span>
+            </summary>
+            <div class="faq-answer">
+              <span class="faq-mark faq-mark-answer" aria-hidden="true">A</span>
+              <!-- 【編集】回答 -->
+              <p>はい、初めての方も安心してご利用いただけます。ここに、お客様の不安を解消する回答を書きます。</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-mark" aria-hidden="true">Q</span>
+              <span>支払い方法は何がありますか？</span>
+            </summary>
+            <div class="faq-answer">
+              <span class="faq-mark faq-mark-answer" aria-hidden="true">A</span>
+              <p>ここに、ご利用いただける支払い方法（銀行振込・クレジットカードなど）と、お支払いの時期を書きます。</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-mark" aria-hidden="true">Q</span>
+              <span>キャンセルや日程の変更はできますか？</span>
+            </summary>
+            <div class="faq-answer">
+              <span class="faq-mark faq-mark-answer" aria-hidden="true">A</span>
+              <p>ここに、キャンセル・変更の受付期限や、キャンセル料の有無を書きます。料金に関わる大切な内容なので、具体的に書くのがおすすめです。</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-mark" aria-hidden="true">Q</span>
+              <span>対応エリアはどこまでですか？</span>
+            </summary>
+            <div class="faq-answer">
+              <span class="faq-mark faq-mark-answer" aria-hidden="true">A</span>
+              <p>ここに、対応できる地域や、オンライン対応の有無を書きます。</p>
+            </div>
+          </details>
+
+        </div>
+
       </div>
     </section>
 
