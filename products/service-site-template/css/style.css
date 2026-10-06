@@ -119,6 +119,19 @@ a {
   color: var(--color-text-sub);
 }
 
+/* 画面には表示せず、読み上げソフトにだけ伝える文字 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ----- 4. ボタン（ページ内のどこでも使える共通部品） ----- */
 .button {
   display: inline-block;
@@ -571,15 +584,90 @@ a {
   padding-top: 2px;   /* 「A」の丸と1行目の文字の高さをそろえる */
 }
 
-/* ----- 11. フッター ----- */
+/* ----- 11. お問い合わせ ----- */
+.contact-box {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* スマホ：ボタンを横幅いっぱいに（メインビジュアルと同じ考え方） */
+.contact-buttons .button {
+  flex: 1 1 auto;
+}
+
+.contact-mail {
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* 受付時間など：「項目名」と「内容」を横に並べた表 */
+.contact-info {
+  display: inline-grid;   /* 中身の幅に合わせた表にして、中央に置く */
+  gap: 8px;
+  margin: 0;
+  padding: 16px 24px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.contact-info div {
+  display: flex;
+  gap: 16px;
+}
+
+.contact-info dt {
+  flex-shrink: 0;
+  width: 6em;   /* 項目名の幅をそろえる（6文字分） */
+  font-weight: bold;
+}
+
+.contact-info dd {
+  margin: 0;
+}
+
+/* ----- 12. フッター ----- */
 .site-footer {
-  padding: 24px 0;
+  padding: 40px 0 24px;
   text-align: center;
   color: var(--color-text-sub);
   border-top: 1px solid var(--color-border);
 }
 
-/* ----- 12. パソコン向けの調整（画面幅768px以上） ----- */
+/* 屋号・先頭へ戻る・コピーライトを縦に並べる */
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-name {
+  margin: 0;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.footer-top {
+  font-size: 14px;
+}
+
+.footer-copy {
+  font-size: 12px;
+}
+
+/* ----- 13. パソコン向けの調整（画面幅768px以上） ----- */
 /* スマホ用を先に書き、広い画面だけ上書きする「モバイルファースト」 */
 @media (min-width: 768px) {
   :root {
@@ -618,12 +706,17 @@ a {
   }
 
   /* タブレット以上：ボタンを文字の長さに合わせた幅に戻す */
-  .hero-buttons .button {
+  .hero-buttons .button,
+  .contact-buttons .button {
     flex: 0 0 auto;
+  }
+
+  .contact-box {
+    padding: 48px 40px;
   }
 }
 
-/* ----- 13. 広い画面向けの調整（画面幅960px以上） ----- */
+/* ----- 14. 広い画面向けの調整（画面幅960px以上） ----- */
 /* 2列に並べると窮屈になるタブレット幅では縦並びのままにし、ここで初めて2列にする */
 @media (min-width: 960px) {
   /* メインビジュアル：左に文章、右に画像の2列 */
