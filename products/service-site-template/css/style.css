@@ -1,0 +1,780 @@
+/* ==========================================================
+   1ページ サービスサイト テンプレート
+   ----------------------------------------------------------
+   色・文字・余白は、すぐ下の「:root」でまとめて変更できます。
+   まずはここだけ編集すれば、サイト全体の雰囲気が変わります。
+   ========================================================== */
+
+/* ----- 1. 設定（ここを編集） ----- */
+:root {
+  /* 色 */
+  --color-main: #2f6f5e;        /* メインカラー：ボタン・見出しの飾りなど */
+  --color-main-dark: #24584a;   /* メインカラーの濃い色：ボタンにカーソルを乗せた時 */
+  --color-accent: #e8a33d;      /* アクセントカラー：カードの線など飾りの部分（文字には使わない） */
+  --color-text: #2b2b2b;        /* 本文の文字色 */
+  --color-text-sub: #666666;    /* 補足文の文字色 */
+  --color-bg: #ffffff;          /* 基本の背景色 */
+  --color-bg-sub: #f5f4f0;      /* セクションを交互に塗り分ける背景色 */
+  --color-border: #dddddd;      /* 線の色 */
+
+  /* 文字 */
+  --font-base: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+
+  /* レイアウト */
+  --container-width: 1080px;    /* コンテンツの最大幅 */
+  --section-space: 64px;        /* セクション上下の余白（スマホ） */
+  --radius: 8px;                /* 角丸の大きさ */
+  --header-height: 112px;       /* 固定ヘッダーの高さ（スマホ）。ページ内リンクの位置合わせに使用 */
+}
+
+/* ----- 2. 基本設定（通常は編集不要） ----- */
+
+/* 幅の計算に padding と border を含める（レイアウト崩れを防ぐ） */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* ページ内リンクをなめらかにスクロール */
+  scroll-behavior: smooth;
+  /* 固定ヘッダーの下に見出しが隠れないよう、ジャンプ先をヘッダーの高さ分ずらす */
+  scroll-padding-top: var(--header-height);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  /* 長い英単語・URLで横にはみ出さないようにする */
+  overflow-wrap: anywhere;
+}
+
+/* 画像が親要素より大きくならないようにする */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 16px;
+  line-height: 1.4;
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+a {
+  color: var(--color-main);
+}
+
+/* キーボードで選んだ場所を、太い枠線ではっきり示す（マウスでクリックした時は出ない） */
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-main);
+  outline-offset: 3px;
+}
+
+/* 「動きを減らす」設定のパソコン・スマホでは、スクロールやアニメーションの動きを止める */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+/* ----- 3. 共通レイアウト ----- */
+
+/* 中身の幅をそろえ、左右に余白をつける箱 */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 各セクションの上下余白 */
+.section {
+  padding: var(--section-space) 0;
+}
+
+/* 偶数番目のセクションだけ背景色を変えて、区切りを分かりやすくする */
+.section:nth-of-type(even) {
+  background-color: var(--color-bg-sub);
+}
+
+/* セクションの見出し（英字ラベル＋見出し＋導入文） */
+.section-head {
+  max-width: 720px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.section-label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1em;   /* 文字の間隔を少し広げる */
+  color: var(--color-main);
+}
+
+.section-title {
+  font-size: 24px;
+}
+
+.section-lead {
+  margin-bottom: 0;
+  color: var(--color-text-sub);
+}
+
+/* 「本文へ移動」リンク：ふだんは画面の外に隠し、Tabキーで選ばれた時だけ左上に表示 */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 16px;
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* 画面には表示せず、読み上げソフトにだけ伝える文字 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ----- 4. ボタン（ページ内のどこでも使える共通部品） ----- */
+.button {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+/* カーソルを乗せた時、キーボードで選んだ時は濃い色に */
+.button:hover,
+.button:focus-visible {
+  background-color: var(--color-main-dark);
+}
+
+/* 小さいボタン（ヘッダー用） */
+.button-small {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* 枠線だけのボタン（2番目に目立たせたいボタン用） */
+.button-outline {
+  background-color: transparent;
+  color: var(--color-main);
+  /* 枠線の分だけ内側の余白を減らし、普通のボタンと同じ大きさにそろえる */
+  padding: 10px 26px;
+  border: 2px solid var(--color-main);
+}
+
+.button-outline:hover,
+.button-outline:focus-visible {
+  background-color: var(--color-main);
+  color: #ffffff;
+}
+
+/* ----- 5. ヘッダー ----- */
+.site-header {
+  /* スクロールしても画面の上に固定する */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* スマホ：1段目に「屋号」と「ボタン」、2段目に「メニュー」 */
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 16px;
+  padding-top: 12px;
+}
+
+.site-logo {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.header-nav {
+  order: 3;             /* HTMLの順番に関係なく、一番最後（2段目）に表示 */
+  width: 100%;
+  overflow-x: auto;     /* メニューが増えて入りきらない時は横にスクロール */
+}
+
+.header-nav ul {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;     /* 箇条書きの「・」を消す */
+  white-space: nowrap;  /* メニュー名の途中で改行しない */
+}
+
+.header-nav a {
+  display: block;
+  padding: 4px 0;
+  font-size: 14px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.header-nav a:hover {
+  color: var(--color-main);
+  text-decoration: underline;
+}
+
+/* ----- 6. メインビジュアル ----- */
+
+/* スマホ：文章 → 画像 の順に縦に並べる */
+.hero-inner {
+  display: grid;
+  gap: 40px;
+}
+
+.hero-label {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-main);
+}
+
+.hero-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.hero-lead {
+  color: var(--color-text-sub);
+  margin-bottom: 28px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;   /* 入りきらない時は折り返す */
+  gap: 12px;
+}
+
+/* スマホ：ボタンを横幅いっぱいに広げて、押しやすく・幅をそろえる */
+.hero-buttons .button {
+  flex: 1 1 auto;
+}
+
+.hero-note {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--color-text-sub);
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  /* どんなサイズの画像でも 横4:縦3 の枠に収め、はみ出た部分は切り抜く */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+/* ----- 7. 特徴 ----- */
+.feature-list {
+  display: grid;
+  /* スマホ・小さいタブレット：1列 */
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-card {
+  padding: 28px 24px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  border-top: 4px solid var(--color-accent);   /* 上だけアクセントカラーの線で、カードらしさを出す */
+}
+
+.feature-number {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: var(--color-main);
+}
+
+.feature-title {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+/* カードの中の最後の段落は下の余白をなくし、上下の余白をそろえる */
+.feature-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* ----- 8. 料金 ----- */
+.plan-list {
+  display: grid;
+  /* 画面幅960px未満：プランを比べやすいよう1列に並べ、広がりすぎないよう幅を制限 */
+  grid-template-columns: 1fr;
+  max-width: 480px;
+  gap: 32px 24px;   /* 縦の間隔 32px（おすすめラベルの分を空ける）、横の間隔 24px */
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.plan-card {
+  /* 中身を縦に並べ、ボタンをカードの一番下にそろえる */
+  display: flex;
+  flex-direction: column;
+  position: relative;   /* 「おすすめ」ラベルの位置の基準にする */
+  padding: 36px 24px 28px;
+  background-color: var(--color-bg);
+  /* 枠線はすべて2pxにそろえる（太さが違うと中身が1pxずれるため） */
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+/* おすすめプランは枠線をメインカラーに */
+.plan-card.is-recommended {
+  border-color: var(--color-main);
+}
+
+/* 「おすすめ」ラベル：カードの上の線に重ねて表示 */
+.plan-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);   /* 自分の大きさの半分だけ左・上にずらして中央にそろえる */
+  margin: 0;
+  padding: 2px 16px;
+  border-radius: 999px;               /* 大きな値にすると両端が丸くなる */
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.plan-name {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.plan-desc {
+  font-size: 14px;
+  color: var(--color-text-sub);
+}
+
+.plan-price {
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1.3;
+  color: var(--color-main);
+}
+
+.plan-price-unit {
+  margin-left: 4px;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.plan-features {
+  /* 内容の行数がプランごとに違っても、ここが伸びてボタンの高さがそろう */
+  flex-grow: 1;
+  margin: 0 0 24px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--color-border);
+  list-style: none;
+  text-align: left;
+}
+
+.plan-features li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+
+/* チェックマーク：L字の線を45度回転させて描く（画像や記号フォントを使わない） */
+.plan-features li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.45em;
+  width: 6px;
+  height: 11px;
+  border-right: 2px solid var(--color-main);
+  border-bottom: 2px solid var(--color-main);
+  transform: rotate(45deg);
+}
+
+.pricing-note {
+  margin: 32px 0 0;
+  font-size: 14px;
+  color: var(--color-text-sub);
+}
+
+/* ----- 9. ご利用の流れ ----- */
+.flow-list {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  /* 番号を数えるカウンター「flow」を用意する（0から始まる） */
+  counter-reset: flow;
+}
+
+.flow-item {
+  position: relative;      /* 番号の丸と線の位置の基準にする */
+  padding: 0 0 24px 64px;  /* 左に丸を置く場所（64px）、下にステップ間の余白（24px） */
+  /* ステップが1つ来るたびに、カウンターを1増やす */
+  counter-increment: flow;
+}
+
+/* 番号の丸：中身はカウンターの数字（自動で 1, 2, 3…） */
+.flow-item::before {
+  content: counter(flow);
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;     /* 正方形を正円にする */
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  /* 数字を丸の中央に置く */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ステップをつなぐ縦線：丸の下から、次の丸の手前まで */
+.flow-item::after {
+  content: "";
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 21px;             /* 丸の中央（44px ÷ 2 − 線の太さ 2px ÷ 2） */
+  width: 2px;
+  background-color: var(--color-main);
+}
+
+/* 最後のステップは線と下の余白をなくす */
+.flow-item:last-child {
+  padding-bottom: 0;
+}
+
+.flow-item:last-child::after {
+  display: none;
+}
+
+.flow-body {
+  padding: 20px 24px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+}
+
+.flow-title {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.flow-body p:last-child {
+  margin-bottom: 0;
+}
+
+.flow-time {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-main);
+}
+
+/* ----- 10. よくある質問 ----- */
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+}
+
+/* 質問（クリックで開閉する部分） */
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 48px 16px 16px;   /* 右側は開閉アイコンの場所 */
+  position: relative;              /* 開閉アイコンの位置の基準にする */
+  font-weight: bold;
+  cursor: pointer;                 /* カーソルを指の形にして、押せることを伝える */
+  list-style: none;                /* ブラウザ標準の三角マークを消す */
+}
+
+/* Safari の標準の三角マークを消す */
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+/* 開閉アイコン：L字の線を回転させた矢印。閉じている時は下向き */
+.faq-question::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-top: -7px;
+  border-right: 2px solid var(--color-main);
+  border-bottom: 2px solid var(--color-main);
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+
+/* 開いている時（details に open が付いた時）は上向きにする */
+.faq-item[open] .faq-question::after {
+  margin-top: -2px;
+  transform: rotate(-135deg);
+}
+
+/* 「Q」「A」の丸 */
+.faq-mark {
+  flex-shrink: 0;   /* 質問が長くても丸がつぶれないようにする */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-main);
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.faq-mark-answer {
+  background-color: var(--color-bg-sub);
+  color: var(--color-main);
+}
+
+/* 回答 */
+.faq-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 16px;
+  padding: 16px 0;
+  border-top: 1px dashed var(--color-border);
+}
+
+.faq-answer p {
+  margin: 0;
+  padding-top: 2px;   /* 「A」の丸と1行目の文字の高さをそろえる */
+}
+
+/* ----- 11. お問い合わせ ----- */
+.contact-box {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* スマホ：ボタンを横幅いっぱいに（メインビジュアルと同じ考え方） */
+.contact-buttons .button {
+  flex: 1 1 auto;
+}
+
+.contact-mail {
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* 受付時間など：「項目名」と「内容」を横に並べた表 */
+.contact-info {
+  display: inline-grid;   /* 中身の幅に合わせた表にして、中央に置く */
+  gap: 8px;
+  margin: 0;
+  padding: 16px 24px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.contact-info div {
+  display: flex;
+  gap: 16px;
+}
+
+.contact-info dt {
+  flex-shrink: 0;
+  width: 6em;   /* 項目名の幅をそろえる（6文字分） */
+  font-weight: bold;
+}
+
+.contact-info dd {
+  margin: 0;
+}
+
+/* ----- 12. フッター ----- */
+.site-footer {
+  padding: 40px 0 24px;
+  text-align: center;
+  color: var(--color-text-sub);
+  border-top: 1px solid var(--color-border);
+}
+
+/* 屋号・先頭へ戻る・コピーライトを縦に並べる */
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-name {
+  margin: 0;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.footer-top {
+  font-size: 14px;
+}
+
+.footer-copy {
+  font-size: 12px;
+}
+
+/* ----- 13. パソコン向けの調整（画面幅768px以上） ----- */
+/* スマホ用を先に書き、広い画面だけ上書きする「モバイルファースト」 */
+@media (min-width: 768px) {
+  :root {
+    --section-space: 96px;
+    --header-height: 80px;
+  }
+
+  /* ヘッダーを1段にまとめる：屋号 ／ メニュー ／ ボタン */
+  .header-inner {
+    flex-wrap: nowrap;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .header-nav {
+    order: 0;           /* HTMLどおりの順番に戻す */
+    width: auto;
+    margin-left: auto;  /* メニューを右側に寄せる */
+  }
+
+  .header-nav ul {
+    gap: 28px;
+    padding: 0;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 30px;
+  }
+
+  .section-head {
+    margin-bottom: 56px;
+  }
+
+  /* 特徴カード：1枚の最小幅を220pxとして、画面に入るだけ横に並べる。
+     カードを増やしたり減らしたりしても、CSSを変えずに自動で並び替わる */
+  .feature-list {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  /* タブレット以上：ボタンを文字の長さに合わせた幅に戻す */
+  .hero-buttons .button,
+  .contact-buttons .button {
+    flex: 0 0 auto;
+  }
+
+  .contact-box {
+    padding: 48px 40px;
+  }
+}
+
+/* ----- 14. 広い画面向けの調整（画面幅960px以上） ----- */
+/* 2列に並べると窮屈になるタブレット幅では縦並びのままにし、ここで初めて2列にする */
+@media (min-width: 960px) {
+  /* メインビジュアル：左に文章、右に画像の2列 */
+  .hero-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;   /* 文章と画像の上下中央をそろえる */
+    gap: 48px;
+  }
+
+  .hero-title {
+    font-size: 40px;
+  }
+
+  /* 料金：横に並べる。「特徴」カードと同じしくみで、プランを増減しても自動で並ぶ */
+  .plan-list {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    max-width: none;
+  }
+}

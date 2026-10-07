@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+  ページ内の <ul> と <ol> に付いている role="list" について：
+  CSSで「・」や番号を消したリストは、Safariの読み上げで「リスト」と伝わらないことがあるため、
+  あえて付けています（HTMLチェックツールで「不要」と表示されることがありますが、削除しないでください）
+-->
+<head>
+  <meta charset="utf-8">
+  <!-- スマートフォンで画面幅に合わせて表示するための指定（削除しないでください） -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 【編集】ブラウザのタブや検索結果に表示されるページ名 -->
+  <title>屋号が入ります｜サービス名が入ります</title>
+  <!-- 【編集】検索結果に表示される説明文（全角80〜120文字程度が目安） -->
+  <meta name="description" content="ここにサービスの説明文が入ります。誰に向けて、何を提供しているかを1〜2文で書きます。">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<!-- id="top"：「ページの先頭へ戻る」リンクの行き先 -->
+<body id="top">
+
+  <!-- キーボードで操作する人が、メニューを飛ばして本文へ移動するためのリンク（Tabキーを押した時だけ表示） -->
+  <a href="#main" class="skip-link">本文へ移動</a>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- 【編集】屋号・ロゴ -->
+      <a href="#top" class="site-logo">屋号が入ります</a>
+
+      <!-- ページ内メニュー：href="#○○" は、下の各セクションの id="○○" へ移動します -->
+      <!-- 【編集】メニュー名（不要なセクションを削除した時は、ここの行も削除） -->
+      <nav class="header-nav" aria-label="ページ内メニュー">
+        <ul role="list">
+          <li><a href="#features">特徴</a></li>
+          <li><a href="#pricing">料金</a></li>
+          <li><a href="#flow">ご利用の流れ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ul>
+      </nav>
+
+      <!-- 【編集】ボタンの文字 -->
+      <a href="#contact" class="button button-small">お問い合わせ</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== 1. メインビジュアル（サービス紹介） ===== -->
+    <section class="section hero" id="hero">
+      <div class="container hero-inner">
+
+        <!-- 左側（スマホでは上）：文章とボタン -->
+        <div class="hero-text">
+          <!-- 【編集】誰向けの、何のサービスかを短く -->
+          <p class="hero-label">〇〇市の個人・小規模事業者さま向け △△サービス</p>
+
+          <!-- 【編集】キャッチコピー（1行10文字前後 × 2行がおすすめ） -->
+          <!-- <br> は改行です。スマホでは1行に約12文字入ります。長いと途中で自動的に折り返されます -->
+          <h1 class="hero-title">あなたの〇〇を、<br>もっと身近に。</h1>
+
+          <!-- 【編集】説明文（2〜3文が目安） -->
+          <p class="hero-lead">ここにサービスの説明文が入ります。どんな悩みを持つ人に、何を提供して、どう変わるのかを2〜3文で書きます。</p>
+
+          <div class="hero-buttons">
+            <!-- 【編集】ボタンの文字 -->
+            <a href="#contact" class="button">お問い合わせはこちら</a>
+            <a href="#pricing" class="button button-outline">料金を見る</a>
+          </div>
+
+          <!-- 【編集】補足（不要なら この p の行ごと削除） -->
+          <p class="hero-note">初回のご相談は無料です</p>
+        </div>
+
+        <!-- 右側（スマホでは下）：画像 -->
+        <!-- 【編集】src に画像ファイル名を書きます -->
+        <!-- alt は画像の説明文です。写真が内容を伝える場合は「打ち合わせをする様子」のように書き、飾りの画像なら空（alt=""）のままにします -->
+        <!-- 違うサイズの画像でも、横4:縦3に切り抜いて表示されます -->
+        <div class="hero-image">
+          <img src="images/hero.svg" alt="" width="1200" height="900">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 2. 特徴 ===== -->
+    <section class="section" id="features">
+      <div class="container">
+
+        <!-- セクションの見出し（工程5以降の各セクションでも同じ形を使います） -->
+        <div class="section-head">
+          <!-- 【編集】小さな英字ラベル・見出し・導入文 -->
+          <p class="section-label">FEATURES</p>
+          <h2 class="section-title">選ばれる3つの理由</h2>
+          <p class="section-lead">ここにセクションの導入文が入ります。1〜2文で短くまとめます。</p>
+        </div>
+
+        <!-- 特徴カード：<li> 〜 </li> が1枚分です -->
+        <!-- 増やす時は1枚分をコピーして貼り付け、減らす時は1枚分を削除します（並びは自動で調整されます） -->
+        <ul class="feature-list" role="list">
+          <li class="feature-card">
+            <!-- 【編集】ラベル・見出し・説明文 -->
+            <p class="feature-number">POINT 01</p>
+            <h3 class="feature-title">ここに特徴の見出しが入ります</h3>
+            <p>お客様にとってのメリットを2〜3行で書きます。「何ができるか」より「どう良くなるか」を書くと伝わりやすくなります。</p>
+          </li>
+          <li class="feature-card">
+            <p class="feature-number">POINT 02</p>
+            <h3 class="feature-title">見出しは短く言い切ります</h3>
+            <p>例：「最短3日でお届け」「土日も対応」など、数字や具体的な言葉を入れると印象に残ります。</p>
+          </li>
+          <li class="feature-card">
+            <p class="feature-number">POINT 03</p>
+            <h3 class="feature-title">3つ目の特徴が入ります</h3>
+            <p>カードは4つ以上に増やすこともできます。増やし方は、このカードの上にあるコメントを見てください。</p>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ===== 3. 料金 ===== -->
+    <section class="section" id="pricing">
+      <div class="container">
+
+        <div class="section-head">
+          <!-- 【編集】小さな英字ラベル・見出し・導入文 -->
+          <p class="section-label">PRICE</p>
+          <h2 class="section-title">料金プラン</h2>
+          <p class="section-lead">ご希望に合わせて選べる3つのプランをご用意しています。</p>
+        </div>
+
+        <!-- 料金プラン：<li> 〜 </li> が1プラン分です（増減の方法は「特徴」カードと同じ） -->
+        <ul class="plan-list" role="list">
+
+          <li class="plan-card">
+            <!-- 【編集】プラン名・説明・料金 -->
+            <h3 class="plan-name">ライトプラン</h3>
+            <p class="plan-desc">まずは試してみたい方に</p>
+            <!-- 一般のお客様向けの料金は、税込価格（総額）で表示するのが基本です -->
+            <p class="plan-price">10,000<span class="plan-price-unit">円（税込）</span></p>
+            <!-- 【編集】プランに含まれる内容（<li> 1行が1項目） -->
+            <ul class="plan-features" role="list">
+              <li>内容1が入ります</li>
+              <li>内容2が入ります</li>
+              <li>内容3が入ります</li>
+            </ul>
+            <a href="#contact" class="button button-outline">このプランで相談する</a>
+          </li>
+
+          <!-- おすすめのプラン：class に is-recommended を付けると強調表示になります -->
+          <!-- 別のプランを強調したい時は、is-recommended と「おすすめ」の行をそのプランへ移動します -->
+          <li class="plan-card is-recommended">
+            <p class="plan-badge">おすすめ</p>
+            <h3 class="plan-name">スタンダードプラン</h3>
+            <p class="plan-desc">いちばん多く選ばれているプラン</p>
+            <p class="plan-price">30,000<span class="plan-price-unit">円（税込）</span></p>
+            <ul class="plan-features" role="list">
+              <li>ライトプランの内容すべて</li>
+              <li>内容4が入ります</li>
+              <li>内容5が入ります</li>
+              <li>内容6が入ります</li>
+            </ul>
+            <a href="#contact" class="button">このプランで相談する</a>
+          </li>
+
+          <li class="plan-card">
+            <h3 class="plan-name">プレミアムプラン</h3>
+            <p class="plan-desc">しっかりサポートを受けたい方に</p>
+            <p class="plan-price">50,000<span class="plan-price-unit">円（税込）〜</span></p>
+            <ul class="plan-features" role="list">
+              <li>スタンダードプランの内容すべて</li>
+              <li>内容7が入ります</li>
+              <li>内容8が入ります</li>
+            </ul>
+            <a href="#contact" class="button button-outline">このプランで相談する</a>
+          </li>
+
+        </ul>
+
+        <!-- 【編集】料金の補足（料金に含まれないもの、追加費用、支払い方法など） -->
+        <p class="pricing-note">※ 表示価格はすべて税込です。料金に含まれない費用（交通費など）がある場合は、事前にお見積もりします。</p>
+
+      </div>
+    </section>
+
+    <!-- ===== 4. ご利用の流れ ===== -->
+    <section class="section" id="flow">
+      <div class="container">
+
+        <div class="section-head">
+          <!-- 【編集】小さな英字ラベル・見出し・導入文 -->
+          <p class="section-label">FLOW</p>
+          <h2 class="section-title">ご利用の流れ</h2>
+          <!-- ステップの数を変えた時は、この文の「4つ」も書き換えてください -->
+          <p class="section-lead">お問い合わせから完了まで、4つのステップで進みます。</p>
+        </div>
+
+        <!-- ステップ：<li> 〜 </li> が1ステップ分です -->
+        <!-- 番号（1, 2, 3…）は自動で付きます。ステップを増やしたり減らしたりしても、番号を書き直す必要はありません -->
+        <ol class="flow-list" role="list">
+
+          <li class="flow-item">
+            <div class="flow-body">
+              <!-- 【編集】ステップ名・説明文・目安（目安が不要なら flow-time の行ごと削除） -->
+              <h3 class="flow-title">お問い合わせ</h3>
+              <p>メールまたはお問い合わせ先から、ご相談内容をお送りください。</p>
+              <p class="flow-time">目安：当日〜翌営業日にご返信</p>
+            </div>
+          </li>
+
+          <li class="flow-item">
+            <div class="flow-body">
+              <h3 class="flow-title">ヒアリング・お見積もり</h3>
+              <p>ご希望や現在のお困りごとを伺い、内容と料金をご提案します。</p>
+              <p class="flow-time">目安：3営業日以内</p>
+            </div>
+          </li>
+
+          <li class="flow-item">
+            <div class="flow-body">
+              <h3 class="flow-title">ご契約・お支払い</h3>
+              <p>内容にご納得いただけましたら、ご契約とお支払いのご案内をします。</p>
+            </div>
+          </li>
+
+          <li class="flow-item">
+            <div class="flow-body">
+              <h3 class="flow-title">サービスのご提供</h3>
+              <p>ご契約内容に沿ってサービスを提供します。終了後のご質問にもお答えします。</p>
+            </div>
+          </li>
+
+        </ol>
+
+      </div>
+    </section>
+
+    <!-- ===== 5. よくある質問 ===== -->
+    <section class="section" id="faq">
+      <div class="container">
+
+        <div class="section-head">
+          <!-- 【編集】小さな英字ラベル・見出し・導入文 -->
+          <p class="section-label">FAQ</p>
+          <h2 class="section-title">よくある質問</h2>
+          <p class="section-lead">お問い合わせの前に、よくいただくご質問をまとめました。</p>
+        </div>
+
+        <!-- 質問：<details> 〜 </details> が1問分です -->
+        <!-- <summary> の中が質問（クリックで開閉）、その下が回答です。JavaScriptは使っていません -->
+        <!-- 最初から開いておきたい質問は、<details class="faq-item" open> のように open を付けます -->
+        <div class="faq-list">
+
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              <span class="faq-mark" aria-hidden="true">Q</span>
+              <!-- 【編集】質問 -->
+              <span>初めてでも利用できますか？</span>
+            </summary>
+            <div class="faq-answer">
+              <span class="faq-mark faq-mark-answer" aria-hidden="true">A</span>
+              <!-- 【編集】回答 -->
+              <p>はい、初めての方も安心してご利用いただけます。ここに、お客様の不安を解消する回答を書きます。</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-mark" aria-hidden="true">Q</span>
+              <span>支払い方法は何がありますか？</span>
+            </summary>
+            <div class="faq-answer">
+              <span class="faq-mark faq-mark-answer" aria-hidden="true">A</span>
+              <p>ここに、ご利用いただける支払い方法（銀行振込・クレジットカードなど）と、お支払いの時期を書きます。</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-mark" aria-hidden="true">Q</span>
+              <span>キャンセルや日程の変更はできますか？</span>
+            </summary>
+            <div class="faq-answer">
+              <span class="faq-mark faq-mark-answer" aria-hidden="true">A</span>
+              <p>ここに、キャンセル・変更の受付期限や、キャンセル料の有無を書きます。料金に関わる大切な内容なので、具体的に書くのがおすすめです。</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span class="faq-mark" aria-hidden="true">Q</span>
+              <span>対応エリアはどこまでですか？</span>
+            </summary>
+            <div class="faq-answer">
+              <span class="faq-mark faq-mark-answer" aria-hidden="true">A</span>
+              <p>ここに、対応できる地域や、オンライン対応の有無を書きます。</p>
+            </div>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 6. お問い合わせ ===== -->
+    <section class="section" id="contact">
+      <div class="container">
+
+        <div class="section-head">
+          <!-- 【編集】小さな英字ラベル・見出し・導入文 -->
+          <p class="section-label">CONTACT</p>
+          <h2 class="section-title">お問い合わせ</h2>
+          <p class="section-lead">ご相談・お見積もりは無料です。お気軽にご連絡ください。</p>
+        </div>
+
+        <!-- このテンプレートには送信フォームがありません（お客様の個人情報をサイトで扱わないため） -->
+        <!-- メール、または予約・フォームなどの外部サービスへ案内します -->
+        <div class="contact-box">
+
+          <div class="contact-buttons">
+            <!-- 【編集】mailto: の後ろを、あなたのメールアドレスに（下の表示用アドレスも同じものに） -->
+            <a href="mailto:info@example.com" class="button">メールで問い合わせる</a>
+
+            <!-- 【編集】予約サービス・LINE公式アカウント・外部フォームなどのURL -->
+            <!-- 使わない場合は、この <a> 〜 </a> を丸ごと削除してください -->
+            <!-- target="_blank" で新しいタブで開きます。rel="noopener" は安全のための指定です（削除しないでください） -->
+            <a href="https://example.com/" class="button button-outline" target="_blank" rel="noopener">
+              予約ページを開く<span aria-hidden="true"> ↗</span><span class="visually-hidden">（新しいタブで開きます）</span>
+            </a>
+          </div>
+
+          <!-- メールソフトが開かない方のために、アドレスを文字でも表示します -->
+          <p class="contact-mail">メールアドレス：<a href="mailto:info@example.com">info@example.com</a></p>
+
+          <!-- 【編集】受付時間など（<div> 〜 </div> が1項目。増減できます） -->
+          <dl class="contact-info">
+            <div>
+              <dt>受付時間</dt>
+              <dd>平日 10:00〜18:00</dd>
+            </div>
+            <div>
+              <dt>返信の目安</dt>
+              <dd>2営業日以内</dd>
+            </div>
+            <div>
+              <dt>定休日</dt>
+              <dd>土・日・祝日</dd>
+            </div>
+          </dl>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <!-- 【編集】屋号 -->
+      <p class="footer-name">屋号が入ります</p>
+      <a href="#top" class="footer-top">ページの先頭へ戻る ↑</a>
+      <!-- 【編集】年と屋号 -->
+      <small class="footer-copy">&copy; 2026 屋号が入ります</small>
+    </div>
+  </footer>
+
+</body>
+</html>
