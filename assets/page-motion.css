@@ -1,0 +1,95 @@
+/* Shared, progressively enhanced motion. Links retain their native behavior. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(root) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(.22, .7, .18, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation: kamon-page-out 300ms cubic-bezier(.22, .7, .18, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: kamon-page-in 420ms cubic-bezier(.22, .7, .18, 1) both;
+}
+
+/* A finite CSS animation is also safe when JavaScript is unavailable. */
+body > :is(main, [data-page-content]) {
+  animation: kamon-page-enter 420ms cubic-bezier(.22, .7, .18, 1) both;
+}
+
+html[data-native-transition] body > :is(main, [data-page-content]),
+html[data-page-restored] body > :is(main, [data-page-content]),
+html[data-page-hash] body > :is(main, [data-page-content]) {
+  animation: none;
+}
+
+/* Pending elements remain visible. Only an observed entry runs the reveal,
+   so an observer/script failure cannot strand content in a hidden state. */
+[data-reveal].reveal-enter {
+  animation: kamon-reveal 440ms cubic-bezier(.22, .7, .18, 1) both;
+}
+
+[data-reveal].reveal-direct {
+  animation: none;
+}
+
+/* The browser still performs the hash navigation; only the destination fades. */
+[id].hash-arrive {
+  animation: kamon-hash-arrive 280ms cubic-bezier(.22, .7, .18, 1) both;
+}
+
+@keyframes kamon-page-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes kamon-page-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes kamon-page-enter {
+  from { opacity: .25; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes kamon-reveal {
+  from { opacity: .12; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes kamon-hash-arrive {
+  from { opacity: .62; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root) { animation-duration: 180ms; }
+  ::view-transition-old(root) { animation-duration: 140ms; }
+  ::view-transition-new(root),
+  body > :is(main, [data-page-content]),
+  [data-reveal].reveal-enter {
+    animation-name: kamon-soft-fade;
+    animation-duration: 180ms;
+  }
+  [id].hash-arrive { animation-duration: 160ms; }
+  @keyframes kamon-soft-fade {
+    from { opacity: .5; }
+    to { opacity: 1; }
+  }
+}
+
+@media print {
+  body > :is(main, [data-page-content]),
+  [data-reveal],
+  [id].hash-arrive { animation: none !important; }
+}
