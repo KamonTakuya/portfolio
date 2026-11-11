@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV統合・集計ツール｜KAMON DESIGN</title>
+<meta name="description" content="月ごと・店舗ごとに分かれたCSVを、ダブルクリックで1つのExcel集計表にまとめる自主制作ツール。できること、進め方、料金の目安を掲載しています。画面は架空データのサンプルです。">
+<link rel="icon" type="image/svg+xml" href="../assets/kamon-folded-mark.svg">
+<style>
+:root{--ink:#263127;--sub:#59644f;--accent:#536329;--line:#d6dacb;--wash:#edf0e4;--paper:#f5f3ec;--deep:#43502e}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);background:#f8f8f2;font:15px/1.85 "Hiragino Sans","Yu Gothic",sans-serif}
+a{color:var(--accent);text-underline-offset:4px}
+a:focus-visible,summary:focus-visible{outline:3px solid #ca7a17;outline-offset:4px}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding-left:1.3em}
+.container{max-width:1150px;margin:auto;padding:0 36px}
+.top{padding:22px 0;border-bottom:1px solid #d4d6cc;background:var(--paper)}
+.top a{color:#202322;text-decoration:none;font:700 12px Arial,sans-serif}
+.label{display:block;font:700 11px Arial,sans-serif;letter-spacing:.13em;color:var(--accent);margin-bottom:22px}
+.intro{padding:65px 0 52px;background:var(--paper)}
+.intro h1{font-size:clamp(29px,4vw,48px);letter-spacing:-.04em;line-height:1.55}
+.intro p{font-size:13px;max-width:680px;color:var(--sub);margin-top:18px}
+.notice{border-left:2px solid #a7ae8c;padding:4px 0 4px 18px;font-size:11px;max-width:760px;color:#65704d;margin-top:24px}
+.shot{padding:52px 0 60px;background:#e4e8d4}
+.shot figure{border:1px solid #b9c2a5;background:#fff;box-shadow:0 20px 45px #36422015}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:11px;color:var(--sub);padding:12px 20px;border-top:1px solid #d5dbc5;background:#f7f8ee}
+.section{padding:65px 0}
+.section h2{font-size:27px;line-height:1.5}
+.lead{font-size:13px;color:var(--sub);max-width:720px;margin-top:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:34px}
+.card{border-top:1px solid #b5c19e;padding:23px 0}
+.card .num{font:700 10px Arial,sans-serif;letter-spacing:.12em;color:var(--accent);margin-bottom:8px}
+.card h3{font-size:17px;line-height:1.6}
+.card p{font-size:12px;color:var(--sub);margin-top:8px}
+.flow{background:var(--wash)}
+.flow ol{margin-top:26px;font-size:13px;display:grid;gap:12px;max-width:760px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:34px;border-block:1px solid #d5dcc7}
+.plan{padding:26px 24px;border-right:1px solid #d5dcc7}
+.plan:first-child{padding-left:0}
+.plan:last-child{border-right:0}
+.plan h3{font-size:15px}
+.plan .price{font-size:26px;font-weight:500;margin:6px 0 10px;letter-spacing:.01em}
+.plan .price small{font-size:11px;color:var(--sub);margin-left:4px}
+.plan ul{font-size:12px;color:var(--sub);display:grid;gap:4px}
+.plan .days{font-size:11px;margin-top:12px;color:#65704d}
+.box{background:#eef0e5;padding:30px;margin-top:34px}
+.box h3{font-size:17px}
+.box ul{font-size:12px;margin-top:12px;display:grid;gap:6px}
+.box p{font-size:11px;color:var(--sub);margin-top:14px}
+.cta{background:#263127;color:#fff;padding:55px 0}
+.cta h2{font-size:27px;line-height:1.5}
+.cta p{font-size:13px;color:#c9d4bf;margin:14px 0 26px;max-width:640px}
+.cta a{display:inline-block;border-radius:30px;font-size:12px;font-weight:700;background:#e5eacb;color:#293927;padding:14px 28px;text-decoration:none}
+footer{font-size:10px;background:var(--paper);padding:24px 36px;text-align:center;color:var(--sub)}
+@media(max-width:760px){
+.container{padding-inline:20px}
+.intro{padding:38px 0 33px}.intro h1{font-size:28px}.intro p{font-size:12px}.notice{font-size:10px}
+.shot{padding:30px 0 36px}
+.section{padding:40px 0}.section h2{font-size:23px}
+.cards{grid-template-columns:1fr;gap:6px}
+.plans{grid-template-columns:1fr}
+.plan,.plan:first-child{padding:20px 0;border-right:0;border-bottom:1px solid #d5dcc7}
+.plan:last-child{border-bottom:0}
+.box{padding:22px}
+.cta h2{font-size:23px}
+}
+</style>
+<link rel="stylesheet" href="../assets/page-motion.css"><script src="../assets/page-motion.js" defer></script>
+</head>
+<body>
+<header class="top"><div class="container"><a href="../">← KAMON DESIGN｜サービス・制作見本へ</a></div></header>
+<main>
+<section class="intro"><div class="container">
+  <span class="label">自主制作 / CSV MERGE &amp; REPORT TOOL</span>
+  <h1>バラバラのCSVを、<br>ダブルクリックで1つの集計表に。</h1>
+  <p>月ごと・店舗ごとに出力されるCSVを、毎回コピーして貼り合わせる作業。フォルダにCSVを入れて実行するだけで、統合した表と、月別・店舗別・商品別の集計をExcelで出力するツールをつくりました。お客さまのCSVに合わせて設定し、お渡しします。</p>
+  <div class="notice">このツールは自主制作です。掲載している画面は架空のデータによるサンプルで、顧客への納品実績や効果測定の結果ではありません。</div>
+</div></section>
+
+<section class="shot" aria-labelledby="shot-heading"><div class="container">
+  <h2 id="shot-heading" class="label" style="margin-bottom:18px">OUTPUT SAMPLE</h2>
+  <figure>
+    <a href="../assets/csv-merge-tool-preview.jpg"><img src="../assets/csv-merge-tool-preview.jpg" width="1600" height="900" alt="2つのサンプルCSVを統合し、月別×店舗の集計、チェック一覧、統合データをExcelに出力した画面の見本"></a>
+    <figcaption>文字コードや列名が違う2つのCSVを読み込み、集計・チェック一覧・統合データを出力した例（架空データ）。画像を選ぶと拡大できます。</figcaption>
+  </figure>
+</div></section>
+
+<section class="section" aria-labelledby="can-heading"><div class="container">
+  <span class="label">WHAT IT DOES</span>
+  <h2 id="can-heading">手作業で起きやすい「ずれ」を、先に見つける。</h2>
+  <p class="lead">まとめるだけでなく、集計に入れてはいけない行を見つけて、理由と場所を一覧にします。</p>
+  <div class="cards">
+    <article class="card"><p class="num">01</p><h3>形式の違うCSVを、そのまま読む。</h3><p>Excelで保存したCSV（Shift_JIS）もUTF-8のCSVも自動で判別。「店舗名」と「店舗」のように列名が違うファイルも、1つの表にそろえます。</p></article>
+    <article class="card"><p class="num">02</p><h3>空欄・重複・数字でない値を一覧に。</h3><p>「どのファイルの何行目か」をチェック一覧に出力。集計から外した行は色を付け、理由を表示します。「1,200」「500円」などの表記は数値として読み取ります。</p></article>
+    <article class="card"><p class="num">03</p><h3>元のデータは変えない。</h3><p>元のCSVは書き換えません。結果は日時入りのExcelで毎回新しく保存し、前回の結果を上書きしません。お客さまのパソコンの中だけで動き、データを外部へ送信しません。</p></article>
+  </div>
+  <div class="box">
+    <h3>動作確認の内容</h3>
+    <ul>
+      <li>自動テスト5件（表記ゆれや欠損を含むCSV、上書きしないこと、読めるファイルがない場合、空のフォルダ、5万行）</li>
+      <li>集計値は、ツールとは別の計算で検算して一致</li>
+      <li>Windows（Python 3.13）でサンプルCSVを実行し、出力内容を確認</li>
+    </ul>
+    <p>確認はサンプルデータによるものです。見出しの前に説明の行があるCSVと、タブ区切りのファイルは、標準では対応していません（カスタムでご相談ください）。ご利用にはPython（無料）のインストールが必要です。手順はマニュアルでご案内します。</p>
+  </div>
+</div></section>
+
+<section class="section flow" aria-labelledby="flow-heading"><div class="container">
+  <span class="label">HOW IT WORKS</span>
+  <h2 id="flow-heading">進め方</h2>
+  <ol>
+    <li>CSVのサンプル（数行・個人情報を消したもので構いません）と、ほしい集計表の形を伺います。</li>
+    <li>範囲と金額を確定します。お支払い（仮払い）の確認後に着手します。</li>
+    <li>お客さまのCSVに合わせて、列名の対応と集計の切り口を設定します。</li>
+    <li>設定済みのツールと操作マニュアルをお渡しし、お客さまのパソコンで動くことを確認します。</li>
+  </ol>
+</div></section>
+
+<section class="section" aria-labelledby="price-heading"><div class="container">
+  <span class="label">PRICING</span>
+  <h2 id="price-heading">料金の目安</h2>
+  <p class="lead">すべて税込。契約前に、範囲・総額・納品物を確認します。値引きではなく、範囲で調整します。</p>
+  <div class="plans">
+    <article class="plan"><h3>ライト</h3><p class="price">¥30,000</p><ul><li>CSVの形式3種類まで</li><li>集計の切り口3種類まで</li><li>修正1回・操作マニュアル付き</li></ul><p class="days">素材の受け取りから5営業日が目安</p></article>
+    <article class="plan"><h3>スタンダード</h3><p class="price">¥50,000</p><ul><li>集計の切り口6種類まで</li><li>独自のチェック2つまで（例：単価の範囲）</li><li>修正2回・オンラインで30分の操作説明</li></ul><p class="days">7営業日が目安</p></article>
+    <article class="plan"><h3>カスタム</h3><p class="price">¥70,000<small>〜</small></p><ul><li>見出しの前に行があるCSV、タブ区切り</li><li>帳票の形式に合わせた出力</li><li>内容を伺い、見積もり後に確定</li></ul><p class="days">納期はご相談</p></article>
+  </div>
+  <div class="box">
+    <h3>保守（任意）｜月 ¥10,000</h3>
+    <ul><li>列名の追加、集計の切り口の変更（月2回まで）</li><li>エラーの調査</li></ul>
+    <p>対応は平日夜と土日です。ご連絡には平日19時以降と土日にお返事します。</p>
+  </div>
+</div></section>
+
+<section class="cta"><div class="container">
+  <h2>毎月の集計、どこに時間がかかっていますか。</h2>
+  <p>CSVの種類と、いま手作業でしていることをお知らせください。ツールで置き換えられる範囲と、お見積もりをご案内します。</p>
+  <a href="../#contact">相談方法を確認する →</a>
+</div></section>
+</main>
+<footer>© 2026 KAMON DESIGN / 架空データを使った自主制作</footer>
+</body>
+</html>
