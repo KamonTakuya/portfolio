@@ -1,0 +1,19 @@
+/* About page reading rhythm: keep the existing KAMON palette and layout. */
+body:has(#profile){font-size:16px;line-height:2}
+body:has(#profile) .hero-lead{max-width:40em;font-size:16px;line-height:2.15}
+body:has(#profile) .about-grid{column-gap:clamp(48px,8vw,120px)}
+body:has(#profile) .about-body{max-width:720px}
+body:has(#profile) .about-body>p:not(.about-lead):not(.small-note){max-width:66ch;font-size:15px;line-height:2.1;margin:0 0 1.15em}
+body:has(#profile) .about-lead{font-size:18px;line-height:1.8;margin-bottom:20px}
+body:has(#profile) .profile-facts{margin-top:34px;font-size:14px;line-height:1.85}
+body:has(#profile) .profile-facts>div{grid-template-columns:minmax(90px,.38fr) 1fr;gap:14px;padding:15px 14px;background:#ffffff70;border:1px solid var(--line)}
+body:has(#profile) .profile-facts>div+div{border-top:0}
+body:has(#profile) section:has(.profile-facts div:nth-child(9)) .profile-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}
+body:has(#profile) section:has(.profile-facts div:nth-child(9)) .profile-facts>div{grid-template-columns:38px 1fr;align-items:start;min-height:72px;padding:16px 12px;border:1px solid var(--line);background:#fff9}
+body:has(#profile) section:has(.profile-facts div:nth-child(9)) .profile-facts dt{font:600 11px/1.7 Arial,sans-serif;letter-spacing:.08em;color:#75634f}
+body:has(#profile) section:has(.profile-facts div:nth-child(9)) .profile-facts dd{font-weight:600}
+body:has(#profile) .value-grid{gap:clamp(22px,4vw,54px)}
+body:has(#profile) .value-grid article{border-top:1px solid currentColor;padding-top:22px}
+body:has(#profile) .value-grid h3{font-size:21px;line-height:1.7}
+body:has(#profile) .value-grid p{font-size:14px;line-height:2}
+@media(max-width:760px){body:has(#profile){font-size:15px}body:has(#profile) .about-body>p:not(.about-lead):not(.small-note){font-size:14px;line-height:2.05}body:has(#profile) .about-lead{font-size:16px}body:has(#profile) .profile-facts>div{grid-template-columns:86px 1fr;gap:10px;padding:13px 10px}body:has(#profile) section:has(.profile-facts div:nth-child(9)) .profile-facts{grid-template-columns:1fr;gap:0}body:has(#profile) section:has(.profile-facts div:nth-child(9)) .profile-facts>div{min-height:0;padding:13px 10px}body:has(#profile) .value-grid h3{font-size:19px}}
